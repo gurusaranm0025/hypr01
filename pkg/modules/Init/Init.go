@@ -1,11 +1,11 @@
-package init
+package initialise
 
 import (
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
 	"log/slog"
 )
 
-func Init() {
+func Initialise() {
 
 	// Battery monitor
 	battChannel := make(chan error)

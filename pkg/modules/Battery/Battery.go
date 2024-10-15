@@ -26,7 +26,7 @@ var BatteryModes = struct {
 }
 
 // function to get the charge percentage and battery charging status
-func getBatteryChargePercentAndStatus() (int, string, error) {
+func GetBatteryChargePercentAndStatus() (int, string, error) {
 	var outPercent int64 = -1
 	var outStatus string = ""
 
@@ -90,7 +90,7 @@ func notify(title, message string, isCritical bool) error {
 func BatteryCheck() error {
 	var err error
 
-	battPercent, battStatus, err := getBatteryChargePercentAndStatus()
+	battPercent, battStatus, err := GetBatteryChargePercentAndStatus()
 	if err != nil {
 		return err
 	}
