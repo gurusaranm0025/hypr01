@@ -1,11 +1,15 @@
-package initialise
+package Init
 
 import (
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
+	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
 	"log/slog"
 )
 
-func Initialise() {
+func Init() {
+	if err := wallapaper.StartWallDaemon(); err != nil {
+		slog.Error(err.Error())
+	}
 
 	// Battery monitor
 	battChannel := make(chan error)

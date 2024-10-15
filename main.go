@@ -5,7 +5,7 @@ import (
 	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
 	brightness "gurusaranm0025/hyprone/pkg/modules/Brightness"
-	initialise "gurusaranm0025/hyprone/pkg/modules/Init"
+	Init "gurusaranm0025/hyprone/pkg/modules/Init"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
 	"log/slog"
@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	var iBright, dBright, iVol, dVol, Init, batStat, screenRes, speakerMuteTog, micMuteTog, wallGUI bool
+	var iBright, dBright, iVol, dVol, initialise, batStat, screenRes, speakerMuteTog, micMuteTog, wallGUI, version bool
 	var wlogout int
 
 	var rootCMD = &cobra.Command{
@@ -97,9 +97,13 @@ func main() {
 				return nil
 			}
 
-			if Init {
-				initialise.Initialise()
-				return nil
+			if version {
+				fmt.Println("0.4.3")
+			}
+
+			if initialise {
+				fmt.Print(121212122121)
+				Init.Init()
 			}
 
 			return nil
@@ -118,13 +122,15 @@ func main() {
 
 	rootCMD.Flags().BoolVarP(&micMuteTog, "mic-toggle", "a", false, "mute and unmute the microphone of the main audio device")
 
-	rootCMD.Flags().BoolVarP(&Init, "init", "I", false, "initialise battery monitor and starts wallpaper daemon.")
+	rootCMD.Flags().BoolVarP(&initialise, "init", "I", false, "initialise battery monitor and starts wallpaper daemon.")
 
 	rootCMD.Flags().BoolVarP(&batStat, "battery-stat", "s", false, "tells the battery charge level and its status")
 
 	rootCMD.Flags().BoolVarP(&screenRes, "display-resolution", "D", false, "prints the display's resolution")
 
 	rootCMD.Flags().BoolVarP(&wallGUI, "wall-gui", "W", false, "open's wallpaper changing GUI - waypaper")
+
+	rootCMD.Flags().BoolVarP(&version, "version", "", false, "version of the package")
 
 	rootCMD.Flags().IntVarP(&wlogout, "logout", "L", -1, "opens logout dialog.")
 

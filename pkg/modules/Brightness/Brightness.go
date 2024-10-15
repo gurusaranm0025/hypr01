@@ -55,7 +55,7 @@ func getBacklightName() (string, error) {
 }
 
 func notify() error {
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(50 * time.Millisecond)
 	var intBright, dotsCount int
 	var backlightName, homeDir string
 	var err error

@@ -1,6 +1,7 @@
 package wallapaper
 
 import (
+	"fmt"
 	"gurusaranm0025/hyprone/pkg/conf"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"os"
@@ -10,7 +11,7 @@ import (
 // Command for setting the wallpaper
 // swww img "$1" --transition-bezier .43,1.19,1,.4 --transition-type "grow" --transition-duration 1 --transition-fps 60 --invert-y --transition-pos "$(hyprctl cursorpos)"
 
-var WALLPAPERS_FOLDER_PATH = filepath.Join(conf.HomeDirPath, "./HyprOne/Walls")
+var WALLPAPERS_FOLDER_PATH = filepath.Join(conf.HomeDirPath, "/.HyprOne/Walls")
 
 var WallpaperControls = struct {
 	Name             string
@@ -27,6 +28,7 @@ var WallpaperControls = struct {
 }
 
 func createDirectory(dirPath string) error {
+	fmt.Println("creating")
 	var err error
 
 	_, err = os.Stat(dirPath)

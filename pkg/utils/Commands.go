@@ -9,10 +9,10 @@ import (
 func ExecCommand(command string, wantOutput bool) (string, error) {
 	var cmdOutput []byte
 	var err error
+	var cmd *exec.Cmd
 
 	commandSplits := strings.Split(command, " ")
-
-	cmd := exec.Command(commandSplits[0], commandSplits[1:]...)
+	cmd = exec.Command(commandSplits[0], commandSplits[1:]...)
 
 	if wantOutput {
 		cmdOutput, err = cmd.CombinedOutput()
