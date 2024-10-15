@@ -4,6 +4,7 @@ import (
 	"fmt"
 	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
+	brightness "gurusaranm0025/hyprone/pkg/modules/Brightness"
 	initialise "gurusaranm0025/hyprone/pkg/modules/Init"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
@@ -52,6 +53,20 @@ func main() {
 
 			if dVol {
 				if err := audio.Volume('d'); err != nil {
+					return err
+				}
+				return nil
+			}
+
+			if iBright {
+				if err := brightness.Brightness('i'); err != nil {
+					return err
+				}
+				return nil
+			}
+
+			if dBright {
+				if err := brightness.Brightness('d'); err != nil {
 					return err
 				}
 				return nil

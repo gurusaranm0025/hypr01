@@ -83,7 +83,7 @@ func notify() error {
 }
 
 func notifyMute(mode, device string) error {
-	iconPath := fmt.Sprintf("%s/.config/dunst/vol/%s-%s.svg", conf.HomeDirPath, mode, device)
+	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/%s-%s.svg", conf.HomeDirPath, mode, device)
 
 	notifyCMD := fmt.Sprintf("notify-send -a \"t2\" -r 911190 --icon=%s %s", iconPath, device)
 
