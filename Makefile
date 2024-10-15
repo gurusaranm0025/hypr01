@@ -22,4 +22,6 @@ clean:
 
 run: build
 	@echo "RUNNING THE BINARY..."
-	./$(BINARY_NAME)	
+	./$(BINARY_NAME)
+
+.PHONY: all build install clean run

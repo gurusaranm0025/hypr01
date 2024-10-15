@@ -12,7 +12,7 @@ import (
 )
 
 var LOWPOINTS = []int{1, 2, 3, 4, 5, 10, 12, 15, 17, 20, 25}
-var HIGHPOINTS = []int{75, 76, 77, 80, 85, 90, 93, 95, 97, 99}
+var HIGHPOINTS = []int{80, 85, 90, 93, 95, 97, 99}
 var chargeAtLastNoti = 0
 
 var BatteryModes = struct {
