@@ -4,4 +4,4 @@ import "os"
 
 var HomeDirPath, _ = os.UserHomeDir()
 
-var auto_coufreq_conf_path = "/etc/auto-cpufreq.conf"
+var AutoCPUFreqConfPath = "/etc/auto-cpufreq.conf"
