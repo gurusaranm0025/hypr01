@@ -1,12 +1,14 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
 	brightness "gurusaranm0025/hyprone/pkg/modules/Brightness"
 	Init "gurusaranm0025/hyprone/pkg/modules/Init"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
+	performace "gurusaranm0025/hyprone/pkg/modules/Performance"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
 	"log/slog"
 	"os"
@@ -17,6 +19,7 @@ import (
 func main() {
 	var iBright, dBright, iVol, dVol, initialise, batStat, screenRes, speakerMuteTog, micMuteTog, wallGUI, version bool
 	var wlogout int
+	var powerProfileMode string
 
 	var rootCMD = &cobra.Command{
 		Use:   "hyprone",
@@ -27,56 +30,48 @@ func main() {
 				if err := wallapaper.OpenWallGUI(); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if micMuteTog {
 				if err := audio.MuteMic(); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if speakerMuteTog {
 				if err := audio.MuteSpeaker(); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if iVol {
 				if err := audio.Volume('i'); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if dVol {
 				if err := audio.Volume('d'); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if iBright {
 				if err := brightness.Brightness('i'); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if dBright {
 				if err := brightness.Brightness('d'); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if wlogout >= 0 {
 				if err := logout.Logout(wlogout); err != nil {
 					return err
 				}
-				return nil
 			}
 
 			if screenRes {
@@ -85,7 +80,6 @@ func main() {
 					return err
 				}
 				fmt.Printf("width ==> %d, Height ==> %d in pixels, Scale ==> %f.\n", width, height, scale)
-				return nil
 			}
 
 			if batStat {
@@ -94,7 +88,6 @@ func main() {
 					return err
 				}
 				fmt.Printf("Battery Percentage ==> %d, Battery Status ==> %s.\n", percent, status)
-				return nil
 			}
 
 			if version {
@@ -104,6 +97,15 @@ func main() {
 			if initialise {
 				fmt.Print(121212122121)
 				Init.Init()
+			}
+
+			if powerProfileMode != "" {
+				err := performace.ChangePowerProfile(powerProfileMode)
+				if err != nil {
+					return err
+				}
+			} else {
+				return errors.New("mention the profile you want to change.")
 			}
 
 			return nil
@@ -133,6 +135,8 @@ func main() {
 	rootCMD.Flags().BoolVarP(&version, "version", "", false, "version of the package")
 
 	rootCMD.Flags().IntVarP(&wlogout, "logout", "L", -1, "opens logout dialog.")
+
+	rootCMD.Flags().StringVarP(&powerProfileMode, "power-profile", "p", "", "change power profile (power saving, balanced, performance)")
 
 	if err := rootCMD.Execute(); err != nil {
 		slog.Error(err.Error())
