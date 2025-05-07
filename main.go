@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
@@ -10,6 +9,7 @@ import (
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
 	performace "gurusaranm0025/hyprone/pkg/modules/Performance"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
+	"gurusaranm0025/hyprone/pkg/utils"
 	"log/slog"
 	"os"
 
@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	var iBright, dBright, iVol, dVol, initialise, batStat, screenRes, speakerMuteTog, micMuteTog, wallGUI, version bool
+	var iBright, dBright, iVol, dVol, initialise, batStat, screenRes, speakerMuteTog, micMuteTog, wallGUI, shell_hist, version bool
 	var wlogout int
 	var powerProfileMode string
 
@@ -90,6 +90,13 @@ func main() {
 				fmt.Printf("Battery Percentage ==> %d, Battery Status ==> %s.\n", percent, status)
 			}
 
+			if shell_hist {
+				_, err := utils.ExecCommand("bash -c /opt/hyprone/Scripts/zsh_shell_history.sh", false)
+				if err != nil {
+					return err
+				}
+			}
+
 			if version {
 				fmt.Println("0.4.3")
 			}
@@ -99,13 +106,11 @@ func main() {
 				Init.Init()
 			}
 
-			if powerProfileMode != "" {
+			if len(powerProfileMode) > 0 {
 				err := performace.ChangePowerProfile(powerProfileMode)
 				if err != nil {
 					return err
 				}
-			} else {
-				return errors.New("mention the profile you want to change.")
 			}
 
 			return nil
@@ -131,6 +136,8 @@ func main() {
 	rootCMD.Flags().BoolVarP(&screenRes, "display-resolution", "D", false, "prints the display's resolution")
 
 	rootCMD.Flags().BoolVarP(&wallGUI, "wall-gui", "W", false, "open's wallpaper changing GUI - waypaper")
+
+	rootCMD.Flags().BoolVarP(&shell_hist, "shell-history", "", false, "shows zsh shell history, in rofi")
 
 	rootCMD.Flags().BoolVarP(&version, "version", "", false, "version of the package")
 
