@@ -1,13 +1,13 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
 	brightness "gurusaranm0025/hyprone/pkg/modules/Brightness"
 	Init "gurusaranm0025/hyprone/pkg/modules/Init"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
-	performace "gurusaranm0025/hyprone/pkg/modules/Performance"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"log/slog"
@@ -107,10 +107,11 @@ func main() {
 			}
 
 			if len(powerProfileMode) > 0 {
-				err := performace.ChangePowerProfile(powerProfileMode)
-				if err != nil {
-					return err
-				}
+				// err := performace.ChangePowerProfile(powerProfileMode)
+				// if err != nil {
+				// 	return err
+				// }
+				return errors.New("power profiles not available")
 			}
 
 			return nil
