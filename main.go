@@ -3,11 +3,11 @@ package main
 import (
 	"errors"
 	"fmt"
-	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
 	brightness "gurusaranm0025/hyprone/pkg/modules/Brightness"
 	Init "gurusaranm0025/hyprone/pkg/modules/Init"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
+	volume "gurusaranm0025/hyprone/pkg/modules/Volume"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"log/slog"
@@ -23,7 +23,7 @@ func main() {
 
 	var rootCMD = &cobra.Command{
 		Use:   "hyprone",
-		Short: "a package that provides, audio and brightness controls, other small services for WMs.",
+		Short: "a package that provides, volume and brightness controls, other small services for WMs.",
 		Long:  "My personal tool to control all my devices connected to my PC, made for Hyprland.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if wallGUI {
@@ -33,25 +33,25 @@ func main() {
 			}
 
 			if micMuteTog {
-				if err := audio.MuteMic(); err != nil {
+				if err := volume.MuteMic(); err != nil {
 					return err
 				}
 			}
 
 			if speakerMuteTog {
-				if err := audio.MuteSpeaker(); err != nil {
+				if err := volume.MuteSpeaker(); err != nil {
 					return err
 				}
 			}
 
 			if iVol {
-				if err := audio.Volume('i'); err != nil {
+				if err := volume.Volume('i'); err != nil {
 					return err
 				}
 			}
 
 			if dVol {
-				if err := audio.Volume('d'); err != nil {
+				if err := volume.Volume('d'); err != nil {
 					return err
 				}
 			}
@@ -126,9 +126,9 @@ func main() {
 
 	rootCMD.Flags().BoolVarP(&dVol, "decr-vol", "v", false, "decreases the volume of the main speaker.")
 
-	rootCMD.Flags().BoolVarP(&speakerMuteTog, "speaker-toggle", "A", false, "mute and unmute the main audio device")
+	rootCMD.Flags().BoolVarP(&speakerMuteTog, "speaker-toggle", "A", false, "mute and unmute the main volume device")
 
-	rootCMD.Flags().BoolVarP(&micMuteTog, "mic-toggle", "a", false, "mute and unmute the microphone of the main audio device")
+	rootCMD.Flags().BoolVarP(&micMuteTog, "mic-toggle", "a", false, "mute and unmute the microphone of the main volume device")
 
 	rootCMD.Flags().BoolVarP(&initialise, "init", "I", false, "initialise battery monitor and starts wallpaper daemon.")
 
