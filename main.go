@@ -33,13 +33,13 @@ func main() {
 			}
 
 			if micMuteTog {
-				if err := volume.MuteMic(); err != nil {
+				if err := volume.Mute("mic"); err != nil {
 					return err
 				}
 			}
 
 			if speakerMuteTog {
-				if err := volume.MuteSpeaker(); err != nil {
+				if err := volume.Mute("speaker"); err != nil {
 					return err
 				}
 			}
