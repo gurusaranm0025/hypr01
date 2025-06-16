@@ -1,0 +1,7 @@
+pipewire-alsa
+alsa-utils
+
+## could-be deps
+
+pw-volume
+wireplumber [wpctl]
