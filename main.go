@@ -91,7 +91,7 @@ func main() {
 			}
 
 			if shell_hist {
-				_, err := utils.ExecCommand("bash -c /opt/hyprone/Scripts/zsh_shell_history.sh", false)
+				_, err := utils.ExecCommand("bash -c /opt/hyprone/Scripts/zsh_shell_history.sh")
 				if err != nil {
 					return err
 				}
