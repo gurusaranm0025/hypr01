@@ -1,1 +1,6 @@
-check if the volume is muted, and if it is show a message
+1. check if the volume is muted, and if it is show a message
+2. caffeinate
+3. shell command history
+4. integrate rofi and theme changes
+5. integrate waybar - privacy indicator style
+6. Code Restructuring
