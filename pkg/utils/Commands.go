@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"os"
 	"os/exec"
 	"strings"
 )
@@ -26,4 +27,24 @@ func ExecCommand(command string, wantOutput bool) (string, error) {
 
 	return string(cmdOutput), nil
 
+}
+
+// function to execute sudo commands
+func SudoCommand(command string) error {
+
+	// commandSplits := strings.Split(command, " ")
+	// fmt.Println("CommandSplits ==>")
+	// fmt.Println(commandSplits)
+	cmd := exec.Command("bash", "-c", command)
+
+	cmd.Stdin = os.Stdin
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+
+	err := cmd.Run()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
