@@ -35,7 +35,7 @@ func GetScreenResolution() (int, int, float64, error) {
 
 	cmd := "hyprctl -j monitors"
 
-	if out, err = utils.ExecCommand(cmd, true); err != nil {
+	if out, err = utils.ExecCommand(cmd); err != nil {
 		return -1, -1, -1, err
 	}
 
@@ -61,7 +61,7 @@ func GetHyprBorder() (int, error) {
 
 	cmd := "hyprctl -j getoption decoration:rounding"
 
-	if out, err = utils.ExecCommand(cmd, true); err != nil {
+	if out, err = utils.ExecCommand(cmd); err != nil {
 		return -1, err
 	}
 

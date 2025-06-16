@@ -16,7 +16,7 @@ var device_ids map[string]string = map[string]string{
 func getVolume(device_id string) (int, error) {
 	command := fmt.Sprintf("wpctl get-volume %s", device_ids[device_id])
 
-	output, err := utils.NewExecCommand(command)
+	output, err := utils.ExecCommand(command)
 	if err != nil {
 		return -1, err
 	}
@@ -39,7 +39,7 @@ func setVolume(device_id string, val int) error {
 
 	command := fmt.Sprintf("wpctl set-volume %s %d%%", device_ids[device_id], val)
 
-	if _, err := utils.NewExecCommand(command); err != nil {
+	if _, err := utils.ExecCommand(command); err != nil {
 		return err
 	}
 
@@ -53,7 +53,7 @@ func setVolume(device_id string, val int) error {
 func Mute(device_id string) error {
 	command := fmt.Sprintf("wpctl set-mute %s toggle", device_ids[device_id])
 
-	if _, err := utils.NewExecCommand(command); err != nil {
+	if _, err := utils.ExecCommand(command); err != nil {
 		return err
 	}
 

@@ -24,7 +24,7 @@ func getBrightness() (int, string, error) {
 	var outStr string
 	var err error
 
-	if outStr, err = utils.ExecCommand(GETBRIGHTNESS, true); err != nil {
+	if outStr, err = utils.ExecCommand(GETBRIGHTNESS); err != nil {
 		return -1, "", err
 	}
 
@@ -37,7 +37,7 @@ func getBrightness() (int, string, error) {
 }
 
 func getBacklightName() (string, error) {
-	out, err := utils.ExecCommand(GETBACKLIGHTNAME, true)
+	out, err := utils.ExecCommand(GETBACKLIGHTNAME)
 	if err != nil {
 		return "", err
 	}
@@ -80,7 +80,7 @@ func notify() error {
 	dots := strings.Repeat(".", dotsCount)
 
 	notifyCmd := fmt.Sprintf("notify-send -a \"t2\" -r 91190 --icon=%s %d%%%s %s", iconPath, intBright, dots, backlightName)
-	if _, err = utils.ExecCommand(notifyCmd, false); err != nil {
+	if _, err = utils.ExecCommand(notifyCmd); err != nil {
 		return err
 	}
 	return nil
@@ -97,7 +97,7 @@ func changeBrightness(value int, mode rune) error {
 	}
 
 	cmd := fmt.Sprintf("brightnessctl set %d%%%s", value, modeSym)
-	if _, err := utils.ExecCommand(cmd, false); err != nil {
+	if _, err := utils.ExecCommand(cmd); err != nil {
 		return err
 	}
 	if err := notify(); err != nil {

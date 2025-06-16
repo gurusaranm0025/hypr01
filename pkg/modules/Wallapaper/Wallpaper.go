@@ -47,14 +47,14 @@ func createDirectory(dirPath string) error {
 }
 
 func OpenWallGUI() error {
-	if _, err := utils.ExecCommand(WallpaperControls.GUICommand, false); err != nil {
+	if _, err := utils.ExecCommand(WallpaperControls.GUICommand); err != nil {
 		return err
 	}
 	return nil
 }
 
 func StartWallDaemon() error {
-	if _, err := utils.ExecCommand(WallpaperControls.DaemonCMD, false); err != nil {
+	if _, err := utils.ExecCommand(WallpaperControls.DaemonCMD); err != nil {
 		return err
 	}
 
