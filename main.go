@@ -3,10 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
-	battery "gurusaranm0025/hyprone/pkg/modules/Battery"
 	brightness "gurusaranm0025/hyprone/pkg/modules/Brightness"
 	Init "gurusaranm0025/hyprone/pkg/modules/Init"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
+	power "gurusaranm0025/hyprone/pkg/modules/Power"
 	volume "gurusaranm0025/hyprone/pkg/modules/Volume"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
 	"gurusaranm0025/hyprone/pkg/utils"
@@ -83,7 +83,7 @@ func main() {
 			}
 
 			if batStat {
-				percent, status, err := battery.GetBatteryChargePercentAndStatus()
+				percent, status, err := power.GetBatteryPercentAndStatus()
 				if err != nil {
 					return err
 				}
@@ -102,7 +102,6 @@ func main() {
 			}
 
 			if initialise {
-				fmt.Print(121212122121)
 				Init.Init()
 			}
 

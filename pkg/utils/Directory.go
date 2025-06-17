@@ -15,8 +15,8 @@ func WriteTo(path, content string) error {
 }
 
 type Entry struct {
-	path string
-	info os.FileInfo
+	Path string
+	Info os.FileInfo
 }
 
 func GetFilesAndDirs(path string, deep bool) ([]Entry, error) {
@@ -31,8 +31,8 @@ func GetFilesAndDirs(path string, deep bool) ([]Entry, error) {
 
 			if p != path {
 				entries = append(entries, Entry{
-					path: path,
-					info: info,
+					Path: path,
+					Info: info,
 				})
 			}
 
@@ -53,8 +53,8 @@ func GetFilesAndDirs(path string, deep bool) ([]Entry, error) {
 				return nil, err
 			}
 			entries = append(entries, Entry{
-				path: filepath.Join(path, item.Name()),
-				info: info,
+				Path: filepath.Join(path, item.Name()),
+				Info: info,
 			})
 		}
 	}
