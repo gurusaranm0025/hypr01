@@ -36,3 +36,25 @@ func Test_BrightnessFunc(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+func Test_GetScreenRes(t *testing.T) {
+	width, height, scale, err := GetScreenresolution()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	fmt.Printf("Width ==> %d, Height ==> %d, Scale ==> %d", width, height, scale)
+
+	assert.Nil(t, err)
+}
+
+func Test_GetHyprBorder(t *testing.T) {
+	border, err := GetHyprBorder()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	fmt.Printf("Border ==> %d", border)
+
+	assert.Nil(t, err)
+}
