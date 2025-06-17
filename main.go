@@ -27,7 +27,7 @@ func main() {
 		Long:  "My personal tool to control all my devices connected to my PC, made for Hyprland.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if wallGUI {
-				if err := wallapaper.OpenWallGUI(); err != nil {
+				if err := wallapaper.WallpaperGUI(); err != nil {
 					return err
 				}
 			}

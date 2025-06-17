@@ -7,7 +7,7 @@ import (
 )
 
 func Init() {
-	if err := wallapaper.StartWallDaemon(); err != nil {
+	if err := wallapaper.StartDaemon(); err != nil {
 		slog.Error(err.Error())
 	}
 

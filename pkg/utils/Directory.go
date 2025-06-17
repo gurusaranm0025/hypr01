@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 )
@@ -92,4 +93,21 @@ func ListFilesAndDirs(path string, deep bool) ([]string, error) {
 	}
 
 	return entries, nil
+}
+
+func CreateDir(path string) error {
+	var err error
+
+	_, err = os.Stat(path)
+	if os.IsNotExist(err) {
+		if err = os.MkdirAll(path, os.ModePerm); err != nil {
+			return err
+		}
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+
+	return errors.New("a file or folder already exists in that path")
 }
