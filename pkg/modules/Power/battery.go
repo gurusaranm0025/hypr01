@@ -76,15 +76,13 @@ func BatteryNotifier() error {
 		return err
 	}
 
-	err = notify("Fully Charged", "You can unplug the charger", false)
-
 	if slices.Contains(LOWPOINTS, percent) && status != BATTERYMODES.Charging && lastNotificationPercent != percent {
 		lastNotificationPercent = percent
 		err = notify("Battery Low", fmt.Sprintf("%d%% is low. Connect to charger", percent), true)
 	} else if slices.Contains(HIGHPOINTS, percent) && status == BATTERYMODES.Charging && lastNotificationPercent != percent {
 		lastNotificationPercent = percent
 		err = notify("Charging", strconv.Itoa(percent), false)
-	} else if status == BATTERYMODES.Charging && lastNotificationPercent != percent {
+	} else if (status == BATTERYMODES.Charging || status == BATTERYMODES.NotCharging) && lastNotificationPercent != percent {
 		lastNotificationPercent = percent
 		err = notify("Fully Charged", "You can unplug the charger", false)
 		time.Sleep(10 * time.Minute)
