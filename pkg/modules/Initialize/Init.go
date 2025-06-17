@@ -1,4 +1,4 @@
-package Init
+package initialize
 
 import (
 	power "gurusaranm0025/hyprone/pkg/modules/Power"
@@ -6,7 +6,7 @@ import (
 	"log/slog"
 )
 
-func Init() {
+func Initializer() {
 	if err := wallapaper.StartDaemon(); err != nil {
 		slog.Error(err.Error())
 	}

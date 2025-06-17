@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	display "gurusaranm0025/hyprone/pkg/modules/Display"
-	Init "gurusaranm0025/hyprone/pkg/modules/Init"
+	initialize "gurusaranm0025/hyprone/pkg/modules/Initialize"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
 	power "gurusaranm0025/hyprone/pkg/modules/Power"
 	volume "gurusaranm0025/hyprone/pkg/modules/Volume"
@@ -102,7 +102,7 @@ func main() {
 			}
 
 			if initialise {
-				Init.Init()
+				initialize.Initializer()
 			}
 
 			if len(powerProfileMode) > 0 {
