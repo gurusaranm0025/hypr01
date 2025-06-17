@@ -6,14 +6,14 @@ import (
 	"path/filepath"
 )
 
-func WriteTo(path, content string) error {
-	err := os.WriteFile(path, []byte(content), 0644)
-	if err != nil {
-		return err
-	}
+// func WriteTo(path, content string) error {
+// 	err := os.WriteFile(path, []byte(content), 0644)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
 type Entry struct {
 	Path string
@@ -98,7 +98,7 @@ func ListFilesAndDirs(path string, deep bool) ([]string, error) {
 func CreateDir(path string) error {
 	var err error
 
-	_, err = os.Stat(path)
+	info, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		if err = os.MkdirAll(path, os.ModePerm); err != nil {
 			return err
@@ -109,5 +109,9 @@ func CreateDir(path string) error {
 		return err
 	}
 
-	return errors.New("a file or folder already exists in that path")
+	if info.IsDir() {
+		return nil
+	} else {
+		return errors.New("a file already exists in that path")
+	}
 }
