@@ -75,11 +75,11 @@ func main() {
 			}
 
 			if screenRes {
-				width, height, scale, err := logout.GetScreenResolution()
+				width, height, scale, err := display.GetScreenresolution()
 				if err != nil {
 					return err
 				}
-				fmt.Printf("width ==> %d, Height ==> %d in pixels, Scale ==> %f.\n", width, height, scale)
+				fmt.Printf("width ==> %d, Height ==> %d in pixels, Scale ==> %d\n", width, height, scale)
 			}
 
 			if batStat {

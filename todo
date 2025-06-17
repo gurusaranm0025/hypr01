@@ -3,4 +3,4 @@
 3. shell command history
 4. integrate rofi and theme changes
 5. integrate waybar - privacy indicator style
-6. Code Restructuring - [VOLUME, POWER, DISPLAY, WALLPAPER, INITIALIZE]
+6. Code Restructuring - [VOLUME, POWER, DISPLAY, WALLPAPER, INITIALIZE, LOGOUT] - DONE
