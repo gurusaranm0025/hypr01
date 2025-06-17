@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	brightness "gurusaranm0025/hyprone/pkg/modules/Brightness"
+	display "gurusaranm0025/hyprone/pkg/modules/Display"
 	Init "gurusaranm0025/hyprone/pkg/modules/Init"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
 	power "gurusaranm0025/hyprone/pkg/modules/Power"
@@ -57,13 +57,13 @@ func main() {
 			}
 
 			if iBright {
-				if err := brightness.Brightness('i'); err != nil {
+				if err := display.Brightness('i'); err != nil {
 					return err
 				}
 			}
 
 			if dBright {
-				if err := brightness.Brightness('d'); err != nil {
+				if err := display.Brightness('d'); err != nil {
 					return err
 				}
 			}
