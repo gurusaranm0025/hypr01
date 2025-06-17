@@ -1,7 +1,5 @@
-pipewire-alsa
-alsa-utils
+wireplumber [wpctl]
 
 ## could-be deps
 
-pw-volume
-wireplumber [wpctl]
+tlp
