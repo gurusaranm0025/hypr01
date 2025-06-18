@@ -2,7 +2,6 @@ package display
 
 import (
 	"fmt"
-	"gurusaranm0025/hyprone/pkg/conf"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"strings"
 )
@@ -16,7 +15,7 @@ func notify() error {
 
 	angle := int(((percent + 2) / 5) * 5)
 
-	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/vol-%d.svg", conf.HomeDirPath, angle)
+	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/vol-%d.svg", utils.GetHomeDir(), angle)
 
 	dots := strings.Repeat(".", percent/15)
 

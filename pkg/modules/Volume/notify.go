@@ -2,7 +2,6 @@ package volume
 
 import (
 	"fmt"
-	"gurusaranm0025/hyprone/pkg/conf"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"strings"
 )
@@ -10,7 +9,7 @@ import (
 func notifyVolume(currentVolume int) error {
 	angle := int(((currentVolume + 2) / 5) * 5)
 
-	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/vol-%d.svg", conf.HomeDirPath, angle)
+	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/vol-%d.svg", utils.GetHomeDir(), angle)
 
 	dotsCount := currentVolume / 15
 	if dotsCount <= 0 {
@@ -28,7 +27,7 @@ func notifyVolume(currentVolume int) error {
 }
 
 func notifyMute(state, device string) error {
-	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/%s-%s.svg", conf.HomeDirPath, state, device)
+	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/%s-%s.svg", utils.GetHomeDir(), state, device)
 
 	var notificationID int = 000001
 	if device == "mic" {

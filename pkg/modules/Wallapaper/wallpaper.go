@@ -2,12 +2,11 @@ package wallapaper
 
 import (
 	"fmt"
-	"gurusaranm0025/hyprone/pkg/conf"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"path/filepath"
 )
 
-var WALLPAPERS_FOLDER = filepath.Join(conf.HomeDirPath, "/.HyprOne/Walls")
+var WALLPAPERS_FOLDER = filepath.Join(utils.GetHomeDir(), "/.HyprOne/Walls")
 
 func WallpaperGUI() error {
 	fmt.Println(WALLPAPERS_FOLDER)

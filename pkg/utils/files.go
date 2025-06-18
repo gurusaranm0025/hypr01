@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"log/slog"
 	"os"
 	"path/filepath"
 )
@@ -25,4 +26,12 @@ func WriteFile(content, path string) error {
 	}
 
 	return nil
+}
+
+func GetHomeDir() string {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		slog.Error(err.Error())
+	}
+	return home
 }

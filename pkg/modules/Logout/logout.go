@@ -2,7 +2,6 @@ package logout
 
 import (
 	"fmt"
-	"gurusaranm0025/hyprone/pkg/conf"
 	display "gurusaranm0025/hyprone/pkg/modules/Display"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"path/filepath"
@@ -13,6 +12,8 @@ func Logout(layout int) error {
 	var width, height, hyprBorder, cols, scale int
 	var err error
 
+	home := utils.GetHomeDir()
+
 	if width, height, scale, err = display.GetScreenresolution(); err != nil {
 		return err
 	}
@@ -22,8 +23,8 @@ func Logout(layout int) error {
 		return err
 	}
 
-	layoutPath := fmt.Sprintf("%s/.config/wlogout/layout_%d", conf.HomeDirPath, layout)
-	stylesPath := fmt.Sprintf("%s/.config/wlogout/style_%d.css", conf.HomeDirPath, layout)
+	layoutPath := fmt.Sprintf("%s/.config/wlogout/layout_%d", home, layout)
+	stylesPath := fmt.Sprintf("%s/.config/wlogout/style_%d.css", home, layout)
 
 	stylesContent, err := utils.ReadFile(stylesPath)
 	if err != nil {
@@ -37,7 +38,7 @@ func Logout(layout int) error {
 	stylesContent = strings.ReplaceAll(stylesContent, "${fontSize}", fontSize)
 	stylesContent = strings.ReplaceAll(stylesContent, "${active_button_radius}", activeButtonRadius)
 	stylesContent = strings.ReplaceAll(stylesContent, "${button_radius}", buttonRadius)
-	stylesContent = strings.ReplaceAll(stylesContent, "${HOME}", conf.HomeDirPath)
+	stylesContent = strings.ReplaceAll(stylesContent, "${HOME}", home)
 
 	switch layout {
 	case 1:
@@ -59,7 +60,7 @@ func Logout(layout int) error {
 		stylesContent = strings.ReplaceAll(stylesContent, "${y_hover}", y_hover)
 	}
 
-	cssPath := filepath.Join(conf.HomeDirPath, ".cache/HyprOne/style.css")
+	cssPath := filepath.Join(home, ".cache/HyprOne/style.css")
 	if err = utils.WriteFile(stylesContent, cssPath); err != nil {
 		return err
 	}
