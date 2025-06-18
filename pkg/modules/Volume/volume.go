@@ -86,6 +86,11 @@ func Volume(value string) error {
 		return err
 	}
 
+	if percent == -999 {
+		notifyMute("muted", "speaker")
+		return nil
+	}
+
 	switch {
 	case value == "+":
 		if percent < 10 {

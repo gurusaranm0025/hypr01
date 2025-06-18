@@ -1,11 +1,9 @@
-1. check if the volume is muted, and if it is show a message
-2. caffeinate
-3. shell command history
-4. integrate rofi and theme changes
-5. integrate waybar - privacy indicator style
-6. Setup Theme option
-7. Logging
-8. More Tests for setBrightness and setVolume
+1. caffeinate
+2. shell command history
+3. integrate rofi and theme changes
+4. integrate waybar - privacy indicator style
+5. Setup Theme option
+6. Logging
 
 FEATURES :
 
@@ -17,4 +15,6 @@ FEATURES :
 
 4.  // rootCMD.Flags().BoolVarP(&screenRes, "display-resolution", "D", false, "prints the display's resolution")
 
-DONE ==> Code Restructuring - [VOLUME, POWER, DISPLAY, WALLPAPER, INITIALIZE, LOGOUT]
+DONE ==> Code Restructuring - [VOLUME, POWER, DISPLAY, WALLPAPER, INITIALIZE, LOGOUT, MAIN, CMD]
+DONE ==> More Tests for setBrightness and setVolume
+DONE ==> check if the volume is muted, it shows a message

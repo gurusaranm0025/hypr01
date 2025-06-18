@@ -29,9 +29,9 @@ func notifyVolume(currentVolume int) error {
 func notifyMute(state, device string) error {
 	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/%s-%s.svg", utils.GetHomeDir(), state, device)
 
-	var notificationID int = 000001
+	var notificationID int = 0000021
 	if device == "mic" {
-		notificationID = 000002
+		notificationID = 0000022
 	}
 
 	command := fmt.Sprintf("notify-send -a \"hyprone\" -r %d --icon=%s %s %s", notificationID, iconPath, state, device)
