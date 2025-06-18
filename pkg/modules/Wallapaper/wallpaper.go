@@ -9,7 +9,6 @@ import (
 var WALLPAPERS_FOLDER = filepath.Join(utils.GetHomeDir(), "/.HyprOne/Walls")
 
 func WallpaperGUI() error {
-	fmt.Println(WALLPAPERS_FOLDER)
 	command := fmt.Sprintf("waypaper --folder %s", WALLPAPERS_FOLDER)
 
 	if _, err := utils.ExecCommand(command); err != nil {

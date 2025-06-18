@@ -29,7 +29,7 @@ func Test_setBrightness(t *testing.T) {
 }
 
 func Test_BrightnessFunc(t *testing.T) {
-	err := Brightness('d')
+	err := Brightness("+")
 	if err != nil {
 		fmt.Println(err.Error())
 	}

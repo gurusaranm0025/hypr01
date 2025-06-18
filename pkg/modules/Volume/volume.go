@@ -1,6 +1,7 @@
 package volume
 
 import (
+	"errors"
 	"fmt"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"log/slog"
@@ -77,29 +78,50 @@ func Mute(device_id string) error {
 
 }
 
-func Volume(mode rune) error {
-	var currentVolume int
+func Volume(value string) error {
+	var percent int
 	var err error
 
-	if currentVolume, err = getVolume("speaker"); err != nil {
+	if percent, err = getVolume("speaker"); err != nil {
 		return err
 	}
 
-	switch mode {
-	case 'i':
-		if currentVolume < 10 {
-			err = setVolume("speaker", currentVolume+1)
+	switch {
+	case value == "+":
+		if percent < 10 {
+			err = setVolume("speaker", percent+1)
 		} else {
-			err = setVolume("speaker", currentVolume+3)
+			err = setVolume("speaker", percent+3)
 		}
-	case 'd':
-		if currentVolume <= 0 {
-			err = setVolume("speaker", 0)
-		} else if currentVolume < 10 {
-			err = setVolume("speaker", currentVolume-1)
+	case value == "-":
+		if percent < 10 {
+			err = setVolume("speaker", percent-1)
 		} else {
-			err = setVolume("speaker", currentVolume-3)
+			err = setVolume("speaker", percent-3)
 		}
+	case strings.HasSuffix(value, "%+") && len(value) > 2:
+		var changeValue int
+		value = strings.TrimSuffix(value, "%+")
+		if changeValue, err = strconv.Atoi(value); err != nil {
+			return err
+		}
+		err = setVolume("speaker", percent+changeValue)
+	case strings.HasSuffix(value, "%-") && len(value) > 2:
+		var changeValue int
+		value = strings.TrimSuffix(value, "%-")
+		if changeValue, err = strconv.Atoi(value); err != nil {
+			return err
+		}
+		err = setVolume("speaker", percent-changeValue)
+	case strings.HasSuffix(value, "%") && len(value) > 1:
+		var changeValue int
+		value = strings.TrimSuffix(value, "%")
+		if changeValue, err = strconv.Atoi(value); err != nil {
+			return err
+		}
+		err = setVolume("speaker", changeValue)
+	default:
+		return errors.New("invalid input")
 	}
 
 	if err != nil {

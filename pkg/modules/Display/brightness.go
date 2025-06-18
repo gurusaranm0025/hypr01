@@ -1,6 +1,7 @@
 package display
 
 import (
+	"errors"
 	"fmt"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"log/slog"
@@ -49,27 +50,51 @@ func setBrightness(val int) error {
 	return nil
 }
 
-func Brightness(mode rune) error {
+func Brightness(value string) error {
+	var percent int
 	var err error
 
-	percent, err := getBrightness()
-	if err != nil {
+	if percent, err = getBrightness(); err != nil {
 		return err
 	}
 
-	switch mode {
-	case 'i':
+	switch {
+	case value == "+":
 		if percent < 10 {
 			err = setBrightness(percent + 1)
 		} else {
 			err = setBrightness(percent + 5)
 		}
-	case 'd':
+	case value == "-":
 		if percent < 10 {
 			err = setBrightness(percent - 1)
 		} else {
 			err = setBrightness(percent - 5)
 		}
+	case strings.HasSuffix(value, "%+") && len(value) > 2:
+		var changeValue int
+		value = strings.TrimSuffix(value, "%+")
+		changeValue, err = strconv.Atoi(value)
+		if err != nil {
+			return err
+		}
+		err = setBrightness(percent + changeValue)
+	case strings.HasSuffix(value, "%-") && len(value) > 2:
+		var changeValue int
+		value = strings.TrimSuffix(value, "%-")
+		changeValue, err = strconv.Atoi(value)
+		if err != nil {
+			return err
+		}
+		err = setBrightness(percent - changeValue)
+	case strings.HasSuffix(value, "%") && len(value) > 1:
+		value = strings.TrimSuffix(value, "%")
+		if percent, err = strconv.Atoi(value); err != nil {
+			return err
+		}
+		err = setBrightness(percent)
+	default:
+		err = errors.New("invalid input")
 	}
 
 	if err != nil {
