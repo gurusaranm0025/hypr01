@@ -65,7 +65,7 @@ func Logout(layout int) error {
 		return err
 	}
 
-	command := fmt.Sprintf("hyprctl dispatch exec \"wlogout -b %d -c 0 -r 0 -m 0 --layout %s --css %s --protocol layer-shell\"", cols, layoutPath, cssPath)
+	command := fmt.Sprintf("wlogout -b %d -c 0 -r 0 -m 0 --layout %s --css %s --protocol layer-shell", cols, layoutPath, cssPath)
 	if _, err = utils.ExecCommand(command); err != nil {
 		return err
 	}

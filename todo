@@ -4,6 +4,7 @@
 4. integrate waybar - privacy indicator style
 5. Setup Theme option
 6. Logging
+7. Make install handle already running hyprone processes
 
 FEATURES :
 
