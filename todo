@@ -5,5 +5,16 @@
 5. integrate waybar - privacy indicator style
 6. Setup Theme option
 7. Logging
+8. More Tests for setBrightness and setVolume
+
+FEATURES :
+
+1.  // rootCMD.Flags().StringVarP(&powerProfileMode, "power-profile", "p", "", "change power profile (power saving, balanced, performance)")
+
+2.  // rootCMD.Flags().BoolVarP(&shell_hist, "shell-history", "", false, "shows zsh shell history, in rofi")
+
+3.  // rootCMD.Flags().BoolVarP(&batStat, "battery-stat", "s", false, "tells the battery charge level and its status")
+
+4.  // rootCMD.Flags().BoolVarP(&screenRes, "display-resolution", "D", false, "prints the display's resolution")
 
 DONE ==> Code Restructuring - [VOLUME, POWER, DISPLAY, WALLPAPER, INITIALIZE, LOGOUT]

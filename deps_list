@@ -2,6 +2,7 @@ wireplumber [wpctl]
 brightnessctl
 waypaper
 swww
+hyprctl
 
 ## could-be deps
 
