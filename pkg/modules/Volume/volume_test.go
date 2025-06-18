@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetVolume(t *testing.T) {
+func Test_GetVolume(t *testing.T) {
 	volumeVal, err := getVolume("speaker")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -19,7 +19,7 @@ func TestGetVolume(t *testing.T) {
 	assert.GreaterOrEqual(t, volumeVal, 0)
 }
 
-func TestMuteSpeaker(t *testing.T) {
+func Test_MuteSpeaker(t *testing.T) {
 	if err := Mute("speaker"); err != nil {
 		fmt.Println(err.Error())
 		fmt.Println("============")
@@ -37,7 +37,7 @@ func TestMuteSpeaker(t *testing.T) {
 	assert.Equal(t, -999, volumeVal, "Device not muted.")
 }
 
-func TestMuteMic(t *testing.T) {
+func Test_MuteMic(t *testing.T) {
 	if err := Mute("mic"); err != nil {
 		fmt.Println(err.Error())
 		fmt.Println("============")
@@ -55,7 +55,7 @@ func TestMuteMic(t *testing.T) {
 	assert.Equal(t, -999, volumeVal, "Device not muted.")
 }
 
-func TestSetVolume(t *testing.T) {
+func Test_SetVolume(t *testing.T) {
 	err := setVolume("speaker", 25)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -64,7 +64,7 @@ func TestSetVolume(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func TestSetVolumeMore100(t *testing.T) {
+func Test_SetVolumeMore100(t *testing.T) {
 	err := setVolume("speaker", 102)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -73,11 +73,40 @@ func TestSetVolumeMore100(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func TestSetVolumeLess0(t *testing.T) {
+func Test_SetVolumeLess0(t *testing.T) {
 	err := setVolume("speaker", -3)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 
 	assert.Nil(t, err)
+}
+
+func Test_VolumeAll(t *testing.T) {
+	var err error
+
+	err = Volume("+")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err)
+
+	err = Volume("5%+")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err)
+
+	err = Volume("5%-")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err)
+
+	err = Volume("50%")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err)
+
 }
