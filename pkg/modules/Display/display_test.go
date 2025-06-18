@@ -58,3 +58,28 @@ func Test_GetHyprBorder(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+func Test_BrightnessAll(t *testing.T) {
+	var err error
+
+	if err = Brightness("+"); err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err)
+
+	if err = Brightness("5%+"); err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err)
+
+	if err = Brightness("50%"); err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err)
+
+	if err = Brightness("hi+"); err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.NotNil(t, err)
+
+}
