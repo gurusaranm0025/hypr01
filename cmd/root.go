@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var VERSION = "0.5.0"
+var VERSION = "0.5.1"
 
 var brightness, sound, mute string
 var initialise, wallpaperGUI, ver bool
