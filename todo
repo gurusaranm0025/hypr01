@@ -1,10 +1,7 @@
-1. caffeinate
-2. shell command history
-3. integrate rofi and theme changes
-4. integrate waybar - privacy indicator style
-5. Setup Theme option
-6. Logging
-7. Make install handle already running hyprone processes
+1. shell command history
+2. Setup Theme option, integrate rofi and theme changes
+3. Logging
+4. Make install handle already running hyprone processes
 
 FEATURES :
 
