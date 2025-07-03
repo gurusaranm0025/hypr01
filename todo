@@ -2,6 +2,7 @@
 2. Setup Theme option, integrate rofi and theme changes
 3. Logging
 4. Make install handle already running hyprone processes
+5. tests for hypridle and utils.IsProccessRunning
 
 FEATURES :
 

@@ -13,9 +13,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var VERSION = "0.5.1"
+var VERSION = "0.5.2"
 
-var brightness, sound, mute string
+var brightness, sound, mute, hypridle string
 var initialise, wallpaperGUI, ver bool
 var logoutLayout int
 
@@ -27,6 +27,12 @@ var rootCMD = &cobra.Command{
 
 		if len(brightness) > 0 {
 			if err = display.Brightness(brightness); err != nil {
+				return err
+			}
+		}
+
+		if hypridle != "" {
+			if err = display.ToggleHyprIdle(hypridle); err != nil {
 				return err
 			}
 		}
@@ -69,6 +75,8 @@ var rootCMD = &cobra.Command{
 
 func initializeFlags() {
 	rootCMD.Flags().StringVarP(&brightness, "brightness", "b", "", "Example values: +, -, 5%+, 5%-, 50%")
+
+	rootCMD.Flags().StringVar(&hypridle, "hypridle", "", "Accepted values: toggle - for toggle, 0 - for stopping hypridle, 1 - for running hypridle")
 
 	rootCMD.Flags().StringVarP(&sound, "volume", "v", "", "Example values: +, -, 5%+, 5%-, 50%")
 
