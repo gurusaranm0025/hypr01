@@ -47,8 +47,6 @@ func GetBatteryPercentAndStatus() (int, string, error) {
 				return -1, "", err
 			}
 
-			fmt.Println("file percent ==> ", string(file))
-
 			if percent, err = strconv.Atoi(strings.TrimSpace(string(file))); err != nil {
 				return -1, "", err
 			}
