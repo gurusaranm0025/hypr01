@@ -13,7 +13,7 @@ build:
 
 install: build
 	@echo "INSTALLING THE BINARY TO $(INSTALL_DIR)"
-	pkill hyprone
+	killall -9 hyprone
 	sudo cp ./build/$(BINARY_NAME) $(INSTALL_DIR)
 	sudo chmod +x $(INSTALL_DIR)/$(BINARY_NAME)
 	hyprone -i & disown

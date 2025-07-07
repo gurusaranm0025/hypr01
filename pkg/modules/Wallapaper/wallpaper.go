@@ -19,8 +19,11 @@ func WallpaperGUI() error {
 
 func StartDaemon() error {
 	var err error
-	if _, err = utils.ExecCommand("swww-daemon"); err != nil {
-		return err
+
+	if !utils.IsProcessRunning("swww-daemon") {
+		if err = utils.ExecInBackground("swww-daemon"); err != nil {
+			return err
+		}
 	}
 
 	if err = utils.CreateDir(WALLPAPERS_FOLDER); err != nil {
