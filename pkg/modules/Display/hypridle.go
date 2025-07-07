@@ -6,20 +6,21 @@ import (
 
 func ToggleHyprIdle(val string) error {
 	var err error
-	var process bool
 
 	if val == "toggle" {
-		process = utils.IsProcessRunning("hypridle")
+		if process := utils.IsProcessRunning("hypridle"); process {
+			_, err = utils.ExecCommand("killall -9 hypridle")
+		} else {
+			err = utils.ExecInBackground("hypridle")
+		}
+		return err
 	}
 
-	var command string
-	if process || val == "0" {
-		command = "pkill hypridle"
-	} else if !process || val == "1" {
-		command = "hyprctl dispatch exec hypridle"
+	if val == "0" {
+		_, err = utils.ExecCommand("killall -9 hypridle")
+	} else {
+		err = utils.ExecInBackground("hypridle")
 	}
-
-	_, err = utils.ExecCommand(command)
 
 	return err
 }

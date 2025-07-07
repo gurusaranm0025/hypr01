@@ -2,6 +2,8 @@ package display
 
 import (
 	"fmt"
+	"gurusaranm0025/hyprone/pkg/utils"
+	"log/slog"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -82,4 +84,52 @@ func Test_BrightnessAll(t *testing.T) {
 	}
 	assert.NotNil(t, err)
 
+}
+
+func Test_hypridleToggle(t *testing.T) {
+	var err error
+
+	process := utils.IsProcessRunning("hypridle")
+
+	if err = ToggleHyprIdle("toggle"); err != nil {
+		slog.Error(err.Error())
+	}
+
+	assert.NotEqual(t, process, utils.IsProcessRunning("hypridle"), "Toggle hypridle not working.")
+}
+
+func Test_hypridleOn(t *testing.T) {
+	var err error
+
+	process := utils.IsProcessRunning("hypridle")
+
+	if process {
+		if _, err = utils.ExecCommand("pkill hypridle"); err != nil {
+			slog.Error(err.Error())
+		}
+	}
+
+	if err = ToggleHyprIdle("1"); err != nil {
+		slog.Error(err.Error())
+	}
+
+	assert.Equal(t, true, utils.IsProcessRunning("hypridle"))
+}
+
+func Test_hypridleOff(t *testing.T) {
+	var err error
+
+	process := utils.IsProcessRunning("hypridle")
+
+	if !process {
+		if _, err = utils.ExecCommand("hypridle & disown"); err != nil {
+			slog.Error(err.Error())
+		}
+	}
+
+	if err = ToggleHyprIdle("0"); err != nil {
+		slog.Error(err.Error())
+	}
+
+	assert.Equal(t, false, utils.IsProcessRunning("hypridle"))
 }
