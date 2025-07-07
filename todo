@@ -1,19 +1,18 @@
-1. shell command history
-2. Setup Theme option, integrate rofi and theme changes
-3. Logging
-4. Make install handle already running hyprone processes
-5. tests for hypridle and utils.IsProccessRunning
+1. Setup Theme option, integrate rofi and theme changes
+2. Logging
 
 FEATURES :
 
 1.  // rootCMD.Flags().StringVarP(&powerProfileMode, "power-profile", "p", "", "change power profile (power saving, balanced, performance)")
 
-2.  // rootCMD.Flags().BoolVarP(&shell_hist, "shell-history", "", false, "shows zsh shell history, in rofi")
+<!-- 2.  // rootCMD.Flags().BoolVarP(&shell_hist, "shell-history", "", false, "shows zsh shell history, in rofi") -->
 
-3.  // rootCMD.Flags().BoolVarP(&batStat, "battery-stat", "s", false, "tells the battery charge level and its status")
+2.  // rootCMD.Flags().BoolVarP(&batStat, "battery-stat", "s", false, "tells the battery charge level and its status")
 
-4.  // rootCMD.Flags().BoolVarP(&screenRes, "display-resolution", "D", false, "prints the display's resolution")
+3.  // rootCMD.Flags().BoolVarP(&screenRes, "display-resolution", "D", false, "prints the display's resolution")
 
 DONE ==> Code Restructuring - [VOLUME, POWER, DISPLAY, WALLPAPER, INITIALIZE, LOGOUT, MAIN, CMD]
 DONE ==> More Tests for setBrightness and setVolume
 DONE ==> check if the volume is muted, it shows a message
+DONE ==> Make install handle already running hyprone processes
+DONE ==> tests for hypridle and utils.IsProccessRunning
