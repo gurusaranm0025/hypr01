@@ -88,7 +88,7 @@ func initializeFlags() {
 
 	rootCMD.Flags().BoolVarP(&wallpaperGUI, "wallpaper-app", "w", false, "Opens waypaper - wallpaper choosing app")
 
-	rootCMD.Flags().BoolVarP(&ver, "version", "V", false, "current version")
+	rootCMD.Flags().BoolVar(&ver, "version", false, "current version")
 }
 
 func Execute() {
