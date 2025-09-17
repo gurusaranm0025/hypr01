@@ -17,7 +17,7 @@ func notifyVolume(currentVolume int) error {
 	}
 	dots := strings.Repeat(".", dotsCount)
 
-	command := fmt.Sprintf("notify-send -a \"hyprone\" -r 000001 --icon=%s %d%% %s", iconPath, currentVolume, dots)
+	command := fmt.Sprintf("notify-send -a \"hyprone-controls\" -r 000001 --icon=%s %d%% %s", iconPath, currentVolume, dots)
 
 	if _, err := utils.ExecCommand(command); err != nil {
 		return err
@@ -34,7 +34,7 @@ func notifyMute(state, device string) error {
 		notificationID = 0000022
 	}
 
-	command := fmt.Sprintf("notify-send -a \"hyprone\" -r %d --icon=%s %s %s", notificationID, iconPath, state, device)
+	command := fmt.Sprintf("notify-send -a \"hyprone-controls\" -r %d --icon=%s %s %s", notificationID, iconPath, state, device)
 
 	if _, err := utils.ExecCommand(command); err != nil {
 		return err
