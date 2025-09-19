@@ -19,7 +19,7 @@ func notify() error {
 
 	dots := strings.Repeat(".", percent/15)
 
-	command := fmt.Sprintf("notify-send -a \"hyprone-controls\" -r 000004 --icon=%s %d%%%s brightness", iconPath, percent, dots)
+	command := fmt.Sprintf("notify-send -a \"hyprone-controls\" --transient -r 000004 --icon=%s %d%%%s brightness", iconPath, percent, dots)
 
 	if _, err := utils.ExecCommand(command); err != nil {
 		return err
