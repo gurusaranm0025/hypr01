@@ -12,7 +12,7 @@ import (
 )
 
 var LOWPOINTS = []int{1, 2, 3, 4, 5, 10, 15, 17, 20, 25}
-var HIGHPOINTS = []int{80, 85, 90, 95, 99}
+var HIGHPOINTS = []int{80, 90, 95, 99}
 var lastNotificationPercent = 0
 
 var BATTERYMODES = struct {
