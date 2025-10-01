@@ -9,9 +9,9 @@ func notify(title, msg string, isCritical bool) error {
 	var command string
 
 	if isCritical {
-		command = fmt.Sprintf("notify-send -a \"hyprone\" -t 5000 -r 000003 -u CRITICAL \"%s\" \"%s\"", title, msg)
+		command = fmt.Sprintf("notify-send -a --transient \"hyprone\" -t 5000 -r 000003 -u CRITICAL \"%s\" \"%s\"", title, msg)
 	} else {
-		command = fmt.Sprintf("notify-send -t 5000 -r 000003 \"%s\" \"%s\"", title, msg)
+		command = fmt.Sprintf("notify-send --transient -t 5000 -r 000003 \"%s\" \"%s\"", title, msg)
 	}
 
 	if _, err := utils.ExecCommand(command); err != nil {
