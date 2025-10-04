@@ -14,7 +14,7 @@ var vol_notify_icons map[string]string = map[string]string{
 }
 
 func getVolumeIcon(currentVolume int) string {
-	if currentVolume == 0 || currentVolume == -999 {
+	if currentVolume == -999 {
 		return vol_notify_icons["muted"]
 	}
 	if currentVolume <= 30 {
@@ -38,11 +38,14 @@ func notifyVolume(currentVolume int) error {
 }
 
 func notifyMute(currentVolume int, device string) error {
+	// fmt.Println("==> ", currentVolume, " ==> device : ", device)
+	// fmt.Println("==> ", getVolumeIcon(currentVolume))
+	// fmt.Println("==> ", float32(currentVolume)/float32(100))
 	var command string
 	if device == "mic" {
 		command = fmt.Sprintf("swayosd-client --custom-icon=\"%s\" --custom-progress=%.2f --custom-progress-text=\"mic\"", getVolumeIcon(currentVolume), float32(currentVolume)/float32(100))
 	} else {
-		command = fmt.Sprintf("swayosd-client --custom-icon=\"%s\" --custom-progress=%.2f", getVolumeIcon(currentVolume), float32(currentVolume)/float32(100))
+		command = fmt.Sprintf("swayosd-client --custom-icon=\"%s\" --custom-progress=%.2f", getVolumeIcon(currentVolume), max(float32(currentVolume)/float32(100), 0.01))
 	}
 
 	if output, err := utils.ExecCommand(command); err != nil {
