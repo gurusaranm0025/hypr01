@@ -3,7 +3,7 @@ package display
 import (
 	"fmt"
 	"gurusaranm0025/hyprone/pkg/utils"
-	"strings"
+	"log/slog"
 )
 
 func notify() error {
@@ -13,15 +13,10 @@ func notify() error {
 		return err
 	}
 
-	angle := int(((percent + 2) / 5) * 5)
+	command := fmt.Sprintf("swayosd-client --custom-icon=display-brightness --custom-progress=%.2f", max(float32(percent)/float32(100), 0.01))
 
-	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/vol-%d.svg", utils.GetHomeDir(), angle)
-
-	dots := strings.Repeat(".", percent/15)
-
-	command := fmt.Sprintf("notify-send -a \"hyprone-controls\" --transient -r 000004 --icon=%s %d%%%s brightness", iconPath, percent, dots)
-
-	if _, err := utils.ExecCommand(command); err != nil {
+	if output, err := utils.ExecCommand(command); err != nil {
+		slog.Error(output)
 		return err
 	}
 
