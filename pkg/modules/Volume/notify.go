@@ -14,7 +14,7 @@ var vol_notify_icons map[string]string = map[string]string{
 }
 
 func getVolumeIcon(currentVolume int) string {
-	if currentVolume == 0 {
+	if currentVolume == 0 || currentVolume == -999 {
 		return vol_notify_icons["muted"]
 	}
 	if currentVolume <= 30 {
@@ -27,18 +27,6 @@ func getVolumeIcon(currentVolume int) string {
 }
 
 func notifyVolume(currentVolume int) error {
-	// angle := int(((currentVolume + 2) / 5) * 5)
-
-	// iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/vol-%d.svg", utils.GetHomeDir(), angle)
-
-	// dotsCount := currentVolume / 15
-	// if dotsCount <= 0 {
-	// 	dotsCount = 1
-	// }
-	// dots := strings.Repeat(".", dotsCount)
-
-	// command := fmt.Sprintf("notify-send -a \"hyprone-controls\" --transient -r 000001 --icon=%s %d%% %s", iconPath, currentVolume, dots)
-
 	command := fmt.Sprintf("swayosd-client --custom-icon=\"%s\" --custom-progress=%.2f", getVolumeIcon(currentVolume), float32(currentVolume)/float32(100))
 
 	if ouput, err := utils.ExecCommand(command); err != nil {
@@ -49,17 +37,16 @@ func notifyVolume(currentVolume int) error {
 	return nil
 }
 
-func notifyMute(state, device string) error {
-	iconPath := fmt.Sprintf("%s/.config/dunst/icons/vol/%s-%s.svg", utils.GetHomeDir(), state, device)
-
-	var notificationID int = 0000021
+func notifyMute(currentVolume int, device string) error {
+	var command string
 	if device == "mic" {
-		notificationID = 0000022
+		command = fmt.Sprintf("swayosd-client --custom-icon=\"%s\" --custom-progress=%.2f --custom-progress-text=\"mic\"", getVolumeIcon(currentVolume), float32(currentVolume)/float32(100))
+	} else {
+		command = fmt.Sprintf("swayosd-client --custom-icon=\"%s\" --custom-progress=%.2f", getVolumeIcon(currentVolume), float32(currentVolume)/float32(100))
 	}
 
-	command := fmt.Sprintf("notify-send -a \"hyprone-controls\" --transient -r %d --icon=%s %s %s", notificationID, iconPath, state, device)
-
-	if _, err := utils.ExecCommand(command); err != nil {
+	if output, err := utils.ExecCommand(command); err != nil {
+		slog.Error(output)
 		return err
 	}
 

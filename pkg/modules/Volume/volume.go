@@ -63,14 +63,14 @@ func Mute(device_id string) error {
 		return err
 	}
 
-	var state string
-	if currentVolume == -999 {
-		state = "muted"
-	} else {
-		state = "unmuted"
-	}
+	// var state string
+	// if currentVolume == -999 {
+	// 	state = "muted"
+	// } else {
+	// 	state = "unmuted"
+	// }
 
-	if err := notifyMute(state, device_id); err != nil {
+	if err := notifyMute(currentVolume, device_id); err != nil {
 		return err
 	}
 
@@ -87,7 +87,7 @@ func Volume(value string) error {
 	}
 
 	if percent == -999 {
-		notifyMute("muted", "speaker")
+		notifyMute(percent, "speaker")
 		return nil
 	}
 
