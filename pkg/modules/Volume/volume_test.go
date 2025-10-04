@@ -110,3 +110,10 @@ func Test_VolumeAll(t *testing.T) {
 	assert.Nil(t, err)
 
 }
+
+func Test_GetVolumeIcon(t *testing.T) {
+	currVol := 23
+	icon := getVolumeIcon(currVol)
+	fmt.Println(icon)
+	assert.Equal(t, vol_notify_icons["low"], icon, "FAILURE")
+}
