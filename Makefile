@@ -1,6 +1,7 @@
 BINARY_NAME=hyprone
 
 INSTALL_DIR=/usr/local/bin
+SCRIPTS_DIR=~/.local/share/bin
 
 GO=go
 
@@ -12,10 +13,13 @@ build:
 	$(GO) build -o ./build/$(BINARY_NAME)
 
 install: build
-	@echo "INSTALLING THE BINARY TO $(INSTALL_DIR)"
+	@echo "INSTALLING THE BINARY..."
 	killall -9 hyprone
 	sudo cp ./build/$(BINARY_NAME) $(INSTALL_DIR)
 	sudo chmod +x $(INSTALL_DIR)/$(BINARY_NAME)
+	@echo "PLACING SCRIPTS IN THEIR RIGHT PLACE..."
+	cp ./pkg/scripts/* $(SCRIPTS_DIR)
+	sudo chmod +x ~/.local/share/bin/*.sh
 	hyprone -i & disown
 
 clean:
