@@ -16,7 +16,7 @@ import (
 var VERSION = "0.5.4-5 (alpha)"
 
 var brightness, sound, mute, hypridle string
-var initialise, wallpaperGUI, ver bool
+var initialise, wallpaperGUI, sinks, ver bool
 var logoutLayout int
 
 var rootCMD = &cobra.Command{
@@ -65,6 +65,12 @@ var rootCMD = &cobra.Command{
 			}
 		}
 
+		if sinks {
+			if err = audio.Sinkswitch(); err != nil {
+				return err
+			}
+		}
+
 		if ver {
 			fmt.Println(VERSION)
 		}
@@ -87,6 +93,8 @@ func initializeFlags() {
 	rootCMD.Flags().IntVarP(&logoutLayout, "logout-menu", "l", 0, "values: 1, 2")
 
 	rootCMD.Flags().BoolVarP(&wallpaperGUI, "wallpaper-app", "w", false, "Opens waypaper - wallpaper choosing app")
+
+	rootCMD.Flags().BoolVar(&sinks, "change-sink", false, "change audio output device")
 
 	rootCMD.Flags().BoolVar(&ver, "version", false, "current version")
 }
