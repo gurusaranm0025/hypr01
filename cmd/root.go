@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"fmt"
+	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	display "gurusaranm0025/hyprone/pkg/modules/Display"
 	initialize "gurusaranm0025/hyprone/pkg/modules/Initialize"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
-	volume "gurusaranm0025/hyprone/pkg/modules/Volume"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
 	"log/slog"
 	"os"
@@ -38,13 +38,13 @@ var rootCMD = &cobra.Command{
 		}
 
 		if len(sound) > 0 {
-			if err = volume.Volume(sound); err != nil {
+			if err = audio.Volume(sound); err != nil {
 				return err
 			}
 		}
 
 		if len(mute) > 0 {
-			if err = volume.Mute(mute); err != nil {
+			if err = audio.Mute(mute); err != nil {
 				return err
 			}
 		}
