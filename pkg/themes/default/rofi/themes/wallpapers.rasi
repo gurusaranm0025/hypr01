@@ -1,0 +1,210 @@
+/*
+   ┏┓┏┓┓ ┏┓┏┳┓┏┓┳┓
+   ┗┓┣ ┃ ┣  ┃ ┃┃┣┫
+   ┗┛┗┛┗┛┗┛ ┻ ┗┛┛┗
+*/
+
+* {
+/* =========================
+   Core accents
+   ========================= */
+primary:                    #7aa2f7;   /* Tokyo Night blue */
+primary-fixed:              #c0caf5;
+primary-fixed-dim:          #7aa2f7;
+on-primary:                 #1a1b26;
+on-primary-fixed:           #16161e;
+on-primary-fixed-variant:   #394b70;
+
+primary-container:          #394b70;
+on-primary-container:       #c0caf5;
+
+/* =========================
+   Secondary (cool cyan)
+   ========================= */
+secondary:                  #7dcfff;
+secondary-fixed:            #b4f9f8;
+secondary-fixed-dim:        #7dcfff;
+on-secondary:               #0b1c2d;
+on-secondary-fixed:         #081423;
+on-secondary-fixed-variant: #2e5f78;
+
+secondary-container:        #2e5f78;
+on-secondary-container:     #b4f9f8;
+
+/* =========================
+   Tertiary (warm but muted)
+   ========================= */
+tertiary:                   #e0af68;
+tertiary-fixed:             #f7c67f;
+tertiary-fixed-dim:         #e0af68;
+on-tertiary:                #2a1e0e;
+on-tertiary-fixed:          #1c1408;
+on-tertiary-fixed-variant:  #5a4a2c;
+
+tertiary-container:         #5a4a2c;
+on-tertiary-container:      #f7c67f;
+
+/* =========================
+   Error (Tokyo Night red)
+   ========================= */
+error:                      #f7768e;
+on-error:                   #2a0f14;
+error-container:            #5a1d2a;
+on-error-container:         #ffd6dd;
+
+/* =========================
+   Surfaces (very important)
+   ========================= */
+/* surface:                    #1a1b26; */
+surface:                    #08080b;
+on-surface:                 #c0caf5;
+on-surface-variant:         #9aa5ce;
+
+surface-dim:                #16161e;
+surface-bright:             #2f334d;
+
+surface-container-lowest:   #13131a;
+surface-container-low:      #191922;
+surface-container:          #1f1f2b;
+surface-container-high:     #292e42;
+surface-container-highest:  #343a55;
+
+/* =========================
+   Structural colors
+   ========================= */
+outline:                    #565f89;
+outline-variant:            #3b4261;
+shadow:                     #000000;
+scrim:                      #000000;
+
+/* =========================
+   Inverse
+   ========================= */
+inverse-surface:            #c0caf5;
+inverse-on-surface:         #1a1b26;
+inverse-primary:            #394b70;
+
+/* =========================
+   UI aliases
+   ========================= */
+bg0:    @surface;
+bg1:    @surface-dim;
+bg2:    #3b426180;   /* translucent TN blue */
+bg3:    @primary-fixed-dim;
+
+fg0:    @on-surface;
+fg1:    #ffffff;
+fg2:    @primary;
+fg3:    #565f89;
+
+accent: #3b426180;
+
+background-color: @bg0;
+text-color:       @fg0;
+
+
+
+  /* bg0: @surface;
+  bg1: @surface-dim;
+  bg2: #3d3d3d80;
+  bg3: @primary-fixed-dim;
+  fg0: @on-surface;
+  fg1: #ffffff;
+  fg2: @primary;
+  fg3: #3d3d3d;
+  accent: #3d3d3d80;
+  background-color: @bg0;
+  text-color: @fg0; */
+}
+
+/*--------------------window----------------------------------------------*/
+window {
+  location: center;
+  anchor: center;
+
+  width: 70%;
+  height: 320px;
+
+  border-radius: 18px;
+  background-color: @bg0;
+}
+
+/*--------------------mainbox---------------------------------------------*/
+mainbox {
+  padding: 10px;
+  background-color: transparent;
+}
+
+/*--------------------inputbar--------------------------------------------*/
+inputbar {
+  background-color: @surface;
+  border-color: @bg3;
+
+  border: 2px;
+  border-radius: 16px;
+
+  padding: 8px 16px;
+  spacing: 8px;
+  children: [ entry];
+}
+entry {
+  placeholder: "Select wallpaper";
+  placeholder-color: @fg3;
+}
+
+/*--------------------listview / grid-------------------------------------*/
+listview {
+  columns: 5;
+  lines: 1;
+  flow: horizontal;
+
+  fixed-height: true;
+  height: 220px;
+
+  spacing: 16px;
+  padding: 6px;
+
+  background-color: transparent;
+}
+
+/*--------------------element (border container)--------------------------*/
+element {
+  orientation: vertical;
+  spacing: 6px;
+
+  padding: 3px;
+  border-radius: 14px;
+
+  background-color: transparent;
+}
+
+/*--------------------element-icon-----------------------------------------*/
+element-icon {
+  size: 160px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+/*--------------------selected element (soft transparent border)----------*/
+element selected {
+  background-color: @accent;
+}
+
+/*--------------------text------------------------------------------------*/
+element-text {
+  padding: 2px 0px;
+  horizontal-align: 0.5;
+
+  background-color: transparent;
+  text-color: @fg1;
+}
+
+element selected element-text {
+  background-color: transparent;
+  text-color: @fg0;
+}
+
+/*--------------------scrollbar-------------------------------------------*/
+scrollbar {
+  handle-width: 0px;
+}

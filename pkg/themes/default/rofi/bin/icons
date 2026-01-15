@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cat ~/.config/rofi/bin/icons.txt \
+    | rofi -dmenu -theme ~/.config/rofi/themes/clipboard.rasi \
+    | awk '{printf "%s", $1}' \
+    | wtype -

@@ -1,0 +1,3 @@
+{
+  "include": ["$HOME/.config/waybar/layouts/with_window.jsonc"]
+}
