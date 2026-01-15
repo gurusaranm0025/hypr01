@@ -6,9 +6,6 @@ import (
 	"gurusaranm0025/hyprone/pkg/utils"
 )
 
-// var WALLPAPERS_FOLDER = filepath.Join(utils.GetHomeDir(), "/.HyprOne/Walls")
-// var WALLPAPER_SELECTOR_ROFI_CONFIG_PATH = filepath.Join(utils.GetHomeDir(), "/.config/rofi/wallpapers/config.rasi")
-
 func WallpaperGUI() error {
 	command := fmt.Sprintf("%s/wallpaper_selector.sh", common.SCRIPTS_DIR_PATH)
 
@@ -30,9 +27,5 @@ func StartDaemon() error {
 		return err
 	}
 
-	return nil
-}
-
-func SetHyprlockWall() error {
 	return nil
 }
