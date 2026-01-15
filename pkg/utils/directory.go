@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+	"log/slog"
 	"os"
 	"path/filepath"
 )
@@ -114,4 +115,12 @@ func CreateDir(path string) error {
 	} else {
 		return errors.New("a file already exists in that path")
 	}
+}
+
+func GetHomeDir() string {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		slog.Error(err.Error())
+	}
+	return home
 }
