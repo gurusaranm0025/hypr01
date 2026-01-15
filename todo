@@ -16,3 +16,15 @@ DONE ==> More Tests for setBrightness and setVolume
 DONE ==> check if the volume is muted, it shows a message
 DONE ==> Make install handle already running hyprone processes
 DONE ==> tests for hypridle and utils.IsProccessRunning
+
+
+===> EMERGENT
+
+1. Hyprlock wallpaper setting func in wallpaper module
+        i. also take a look at wallpaper script.
+2. finish theme setup function.
+        1. monitor.conf in hyprland conf needs the monitor value of that particular monitor.
+        2. Need to remove junks from logout function. (because of the moved file generating)
+
++++ NOTES +++
+1. still some paths are left as it is, in the hyprland configs (default theme)
