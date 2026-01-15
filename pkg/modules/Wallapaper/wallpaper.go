@@ -4,15 +4,13 @@ import (
 	"fmt"
 	"gurusaranm0025/hyprone/pkg/common"
 	"gurusaranm0025/hyprone/pkg/utils"
-	"path/filepath"
 )
 
-var WALLPAPERS_FOLDER = filepath.Join(utils.GetHomeDir(), "/.HyprOne/Walls")
-var WALLPAPER_SELECTOR_ROFI_CONFIG_PATH = filepath.Join(utils.GetHomeDir(), "/.config/rofi/wallpapers/config.rasi")
+// var WALLPAPERS_FOLDER = filepath.Join(utils.GetHomeDir(), "/.HyprOne/Walls")
+// var WALLPAPER_SELECTOR_ROFI_CONFIG_PATH = filepath.Join(utils.GetHomeDir(), "/.config/rofi/wallpapers/config.rasi")
 
 func WallpaperGUI() error {
-	// command := fmt.Sprintf("waypaper --folder %s", WALLPAPERS_FOLDER)
-	command := fmt.Sprintf("%s/wallpaper_selector.sh", common.SCRIPTS_PATH)
+	command := fmt.Sprintf("%s/wallpaper_selector.sh", common.SCRIPTS_DIR_PATH)
 
 	if _, err := utils.ExecCommand(command); err != nil {
 		return err
@@ -28,9 +26,13 @@ func StartDaemon() error {
 		return err
 	}
 
-	if err = utils.CreateDir(WALLPAPERS_FOLDER); err != nil {
+	if err = utils.CreateDir(common.ALL_WALLS_DIR_PATH); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+func SetHyprlockWall() error {
 	return nil
 }
