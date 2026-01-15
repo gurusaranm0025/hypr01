@@ -67,14 +67,22 @@ func (t *Themer) filesCopier(fileFolderLocation, targetLocation string) error {
 		} else {
 			if strings.HasPrefix(entry.Info.Name(), "$") {
 				copy_location = filepath.Join(targetLocation, strings.TrimPrefix(entry.Info.Name(), "$"))
+				dirPath := filepath.Dir(copy_location)
+				if err = utils.CreateDir(dirPath); err != nil {
+					return err
+				}
 				if err = t.filler(current_location, copy_location); err != nil {
 					return err
 				}
 			} else {
-				fmt.Printf("filesCopier ===> %s --> %s\n", current_location, copy_location)
+				// fmt.Printf("filesCopier ===> %s --> %s\n", current_location, copy_location)
+				dirPath := filepath.Dir(copy_location)
+				if err = utils.CreateDir(dirPath); err != nil {
+					return err
+				}
 				command := fmt.Sprintf("cp %s %s", current_location, copy_location)
-				if out, err := utils.ExecCommand(command); err != nil {
-					fmt.Printf("ERROR ===> %s\n", out)
+				if _, err = utils.ExecCommand(command); err != nil {
+					// fmt.Printf("ERROR ===> %s\n", out)
 					return err
 				}
 			}
@@ -100,7 +108,7 @@ func (t *Themer) filler(path, savePath string) error {
 		return err
 	}
 
-	fmt.Printf("filler ==> %s --> %s\n", path, savePath)
+	// fmt.Printf("filler ==> %s --> %s\n", path, savePath)
 
 	return nil
 }
