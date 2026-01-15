@@ -7,6 +7,7 @@ import (
 	initialize "gurusaranm0025/hyprone/pkg/modules/Initialize"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
+	"gurusaranm0025/hyprone/pkg/modules/themer"
 	"log/slog"
 	"os"
 
@@ -15,8 +16,8 @@ import (
 
 var VERSION = "0.5.6-5 (alpha)"
 
-var brightness, sound, mute, hypridle string
-var initialise, wallpaperGUI, sinks, ver bool
+var brightness, sound, mute, hypridle, installTheme string
+var initialise, wallpaperGUI, sinks, themeInstall, ver bool
 var logoutLayout int
 
 var rootCMD = &cobra.Command{
@@ -71,6 +72,13 @@ var rootCMD = &cobra.Command{
 			}
 		}
 
+		if len(installTheme) > 0 {
+			theme := themer.NewThemer(installTheme)
+			if err = theme.Install(); err != nil {
+				return err
+			}
+		}
+
 		if ver {
 			fmt.Println(VERSION)
 		}
@@ -95,6 +103,8 @@ func initializeFlags() {
 	rootCMD.Flags().BoolVarP(&wallpaperGUI, "wallpaper-app", "w", false, "Opens waypaper - wallpaper choosing app")
 
 	rootCMD.Flags().BoolVar(&sinks, "change-sink", false, "change audio output device")
+
+	rootCMD.Flags().StringVar(&installTheme, "install-theme", "", "Name of any themes available. Eg: default (For now only default is there...)")
 
 	rootCMD.Flags().BoolVar(&ver, "version", false, "current version")
 }
