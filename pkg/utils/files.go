@@ -16,8 +16,22 @@ func ReadFile(path string) (string, error) {
 func WriteFile(content, path string) error {
 	var err error
 
-	if err = CreateDir(filepath.Dir(path)); err != nil {
-		return err
+	dirPath := filepath.Dir(path)
+	info, err := os.Stat(dirPath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			if err = CreateDir(dirPath); err != nil {
+				return err
+			}
+		} else {
+			return err
+		}
+	}
+
+	if !info.IsDir() {
+		if err = CreateDir(dirPath); err != nil {
+			return err
+		}
 	}
 
 	if err = os.WriteFile(path, []byte(content), os.ModePerm); err != nil {
