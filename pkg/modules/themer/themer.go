@@ -73,8 +73,8 @@ func (t *Themer) filesCopier(fileFolderLocation, targetLocation string) error {
 			} else {
 				fmt.Printf("filesCopier ===> %s --> %s\n", current_location, copy_location)
 				command := fmt.Sprintf("cp %s %s", current_location, copy_location)
-				if _, err = utils.ExecCommand(command); err != nil {
-					fmt.Printf("ERROR ===> %s\n", err.Error())
+				if out, err := utils.ExecCommand(command); err != nil {
+					fmt.Printf("ERROR ===> %s\n", out)
 					return err
 				}
 			}
