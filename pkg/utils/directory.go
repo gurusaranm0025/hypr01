@@ -124,3 +124,11 @@ func GetHomeDir() string {
 	}
 	return home
 }
+
+func GetCurrentWorkingDir() string {
+	dir, err := os.Getwd()
+	if err != nil {
+		slog.Error(err.Error())
+	}
+	return dir
+}
