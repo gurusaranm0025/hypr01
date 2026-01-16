@@ -20,6 +20,7 @@ FEATURES :
         2. Need to remove junks from logout function. (because of the moved file generating)
 3. Wallpaper_selector.sh/shell_history.sh issue - fix :: finish scripts folder work
 4. Fix: Floating window size (resize)
+5. Shell files placing
 
 +++ NOTES +++
 1. still some paths are left as it is, in the hyprland configs (default theme)
