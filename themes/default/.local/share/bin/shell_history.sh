@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to Zsh history file
-HIST_FILE="$HOME/.config/zsh/.zsh_history"
+HIST_FILE="$HOME/.zsh_history"
 
 # Check for wl-copy (for Wayland systems)
 if ! command -v wl-copy &> /dev/null; then
