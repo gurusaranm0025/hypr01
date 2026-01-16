@@ -45,6 +45,10 @@ func (t *Themer) Install() error {
 		return err
 	}
 
+	if _, err = utils.ExecCommand("fc-cache -fv"); err != nil {
+		return err
+	}
+
 	return nil
 }
 
