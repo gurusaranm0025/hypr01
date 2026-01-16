@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="lukerandall"
@@ -86,10 +85,12 @@ alias system-update="sudo pacman -Syu --noconfirm && yay -Syu && flatpak update"
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
 
-HISTFILE=~/.config/zsh/.zsh_history
+HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory
+
+source $ZSH/oh-my-zsh.sh
 
 # NEW EDITS
 
