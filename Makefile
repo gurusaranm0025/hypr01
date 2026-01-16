@@ -8,21 +8,19 @@ GO=go
 all: build install
 
 build:
-	@echo "BUILDING THE BINARY..."
+	@echo "BUILDING BINARY..."
 	@mkdir -p ./build
 	$(GO) build -o ./build/$(BINARY_NAME)
 
 install: build
-	@echo "INSTALLING THE BINARY..."
+	@echo "KILLING hyprone PROCESS..."
 	killall -9 hyprone
+
+	@echo "INSTALLING..."
 	sudo cp ./build/$(BINARY_NAME) $(INSTALL_DIR)
 	sudo chmod +x $(INSTALL_DIR)/$(BINARY_NAME)
-	
-	@echo "PLACING SCRIPTS IN THEIR RIGHT PLACE..."
-	cp ./scripts/* $(SCRIPTS_DIR)
-	sudo chmod +x ~/.local/share/bin/*.sh
-	
-	@echo "STARTING HYPRONE..."
+		
+	@echo "STARTING hyprone..."
 	hyprone -i & disown
 
 clean:

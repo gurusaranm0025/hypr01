@@ -14,7 +14,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var VERSION = "0.6.0-1 (alpha)"
+var VERSION = "0.6.1-0 (alpha)"
 
 var brightness, sound, mute, hypridle, installTheme string
 var initialise, wallpaperGUI, sinks, themeInstall, ver bool
