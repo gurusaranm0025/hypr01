@@ -1,5 +1,6 @@
 1. Setup Theme option, integrate rofi and theme changes
 2. Logging
+3. Update checker (hyprone, themes)
 
 FEATURES :
 
@@ -13,14 +14,11 @@ FEATURES :
 
 ===> CRITICAL
 
-1. Hyprlock wallpaper setting func in wallpaper module
-        i. also take a look at wallpaper script.
-2. finish theme setup function.
+1. finish theme setup function.
         1. monitor.conf in hyprland conf needs the monitor value of that particular monitor.
         2. Need to remove junks from logout function. (because of the moved file generating)
-3. Wallpaper_selector.sh/shell_history.sh issue - fix :: finish scripts folder work
-4. Fix: Floating window size (resize)
-5. Shell files placing
+2. Fix: Floating window size (resize)
 
 +++ NOTES +++
 1. still some paths are left as it is, in the hyprland configs (default theme)
+2. when scripts are pushed into repo and installed elsewhere, their file permissions are persistent.
