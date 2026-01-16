@@ -11,20 +11,15 @@ FEATURES :
 
 3.  // rootCMD.Flags().BoolVarP(&screenRes, "display-resolution", "D", false, "prints the display's resolution")
 
-DONE ==> Code Restructuring - [VOLUME, POWER, DISPLAY, WALLPAPER, INITIALIZE, LOGOUT, MAIN, CMD]
-DONE ==> More Tests for setBrightness and setVolume
-DONE ==> check if the volume is muted, it shows a message
-DONE ==> Make install handle already running hyprone processes
-DONE ==> tests for hypridle and utils.IsProccessRunning
-
-
-===> EMERGENT
+===> CRITICAL
 
 1. Hyprlock wallpaper setting func in wallpaper module
         i. also take a look at wallpaper script.
 2. finish theme setup function.
         1. monitor.conf in hyprland conf needs the monitor value of that particular monitor.
         2. Need to remove junks from logout function. (because of the moved file generating)
+3. Wallpaper_selector.sh/shell_history.sh issue - fix :: finish scripts folder work
+4. Fix: Floating window size (resize)
 
 +++ NOTES +++
 1. still some paths are left as it is, in the hyprland configs (default theme)
