@@ -17,9 +17,12 @@ install: build
 	killall -9 hyprone
 	sudo cp ./build/$(BINARY_NAME) $(INSTALL_DIR)
 	sudo chmod +x $(INSTALL_DIR)/$(BINARY_NAME)
+	
 	@echo "PLACING SCRIPTS IN THEIR RIGHT PLACE..."
-	cp ./pkg/scripts/* $(SCRIPTS_DIR)
+	cp ./scripts/* $(SCRIPTS_DIR)
 	sudo chmod +x ~/.local/share/bin/*.sh
+	
+	@echo "STARTING HYPRONE..."
 	hyprone -i & disown
 
 clean:

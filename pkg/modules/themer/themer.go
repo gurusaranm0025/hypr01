@@ -34,7 +34,7 @@ func (t *Themer) Install() error {
 	}
 
 	// DOWNLOADING THEME
-	if _, err = utils.ExecCommand(fmt.Sprintf("curl -L https://codeload.github.com/gurusaranm0025/hypr01/tar.gz/main | tar -xz --strip-components=3 hypr01-main/pkg/themes/%s", t.ThemeName)); err != nil {
+	if _, err = utils.ExecCommand(fmt.Sprintf("curl -L https://codeload.github.com/gurusaranm0025/hypr01/tar.gz/main | tar -xz --strip-components=2 hypr01-main/themes/%s", t.ThemeName)); err != nil {
 		return err
 	}
 
