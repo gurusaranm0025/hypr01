@@ -5,6 +5,7 @@ import (
 	"gurusaranm0025/hyprone/pkg/common"
 	"gurusaranm0025/hyprone/pkg/modules/setup"
 	"gurusaranm0025/hyprone/pkg/utils"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"strings"
@@ -34,12 +35,13 @@ func (t *Themer) Install() error {
 	}
 
 	// DOWNLOADING THEME
-	if _, err = utils.ExecCommand(fmt.Sprintf("curl -L https://codeload.github.com/gurusaranm0025/hypr01/tar.gz/main | tar -xz --strip-components=2 hypr01-main/themes/%s", t.ThemeName)); err != nil {
+	if out, err := utils.ExecCommand(fmt.Sprintf("curl -L https://codeload.github.com/gurusaranm0025/hypr01/tar.gz/main | tar -xz --strip-components=2 hypr01-main/themes/%s", t.ThemeName)); err != nil {
+		slog.Error(out)
 		return err
 	}
 
 	// PLACING THE THEME IN THE CORRECT PLACE
-	if err = t.filesCopier(filepath.Join(common.GIT_CLONE_DIR_PATH, t.ThemeName), filepath.Join(utils.GetHomeDir(), ".config")); err != nil {
+	if err = t.filesCopier(filepath.Join(common.GIT_CLONE_DIR_PATH, t.ThemeName), utils.GetHomeDir()); err != nil {
 		return err
 	}
 
@@ -65,21 +67,18 @@ func (t *Themer) filesCopier(fileFolderLocation, targetLocation string) error {
 				return err
 			}
 		} else {
+
+			if err = utils.CreateDir(filepath.Dir(copy_location)); err != nil {
+				return err
+			}
+
 			if strings.HasPrefix(entry.Info.Name(), "$") {
 				copy_location = filepath.Join(targetLocation, strings.TrimPrefix(entry.Info.Name(), "$"))
-				dirPath := filepath.Dir(copy_location)
-				if err = utils.CreateDir(dirPath); err != nil {
-					return err
-				}
 				if err = t.filler(current_location, copy_location); err != nil {
 					return err
 				}
 			} else {
 				// fmt.Printf("filesCopier ===> %s --> %s\n", current_location, copy_location)
-				dirPath := filepath.Dir(copy_location)
-				if err = utils.CreateDir(dirPath); err != nil {
-					return err
-				}
 				command := fmt.Sprintf("cp %s %s", current_location, copy_location)
 				if _, err = utils.ExecCommand(command); err != nil {
 					// fmt.Printf("ERROR ===> %s\n", out)
@@ -87,7 +86,6 @@ func (t *Themer) filesCopier(fileFolderLocation, targetLocation string) error {
 				}
 			}
 		}
-
 	}
 
 	return nil
