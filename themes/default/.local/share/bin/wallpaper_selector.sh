@@ -23,7 +23,6 @@ selection="$(echo -e "$(printf '%s\n' "${options[@]}")" | rofi -dmenu -show-icon
 echo $selection
 
 if [ -n "$IMAGES_DIR/$selection" ]; then
-	rm -r "$CURRENT_WALL_DIR/*"
 	cp "$IMAGES_DIR/$selection" "$CURRENT_WALL_DIR/wallpaper"
 	swww img "$CURRENT_WALL_DIR" --transition-type fade --transition-duration 0.5
 
