@@ -102,7 +102,7 @@ func (t *Themer) filler(path, savePath string) error {
 		return err
 	}
 
-	for old, new := range common.PathCounterParts {
+	for old, new := range common.PlaceholderValues {
 		file = strings.ReplaceAll(file, old, new)
 	}
 
