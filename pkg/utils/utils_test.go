@@ -32,3 +32,11 @@ func TestGetFilesAndDirs(t *testing.T) {
 
 	assert.IsType(t, []Entry{}, entries, "Not a Custom Entry type")
 }
+
+func TestPackageInstaller(t *testing.T) {
+	err := InstallPackages([]string{"bash"}...)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	assert.Nil(t, err, "OH no..., there is an error, it seems...")
+}

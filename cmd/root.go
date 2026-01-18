@@ -1,12 +1,14 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	audio "gurusaranm0025/hyprone/pkg/modules/Audio"
 	display "gurusaranm0025/hyprone/pkg/modules/Display"
 	initialize "gurusaranm0025/hyprone/pkg/modules/Initialize"
 	logout "gurusaranm0025/hyprone/pkg/modules/Logout"
 	wallapaper "gurusaranm0025/hyprone/pkg/modules/Wallapaper"
+	"gurusaranm0025/hyprone/pkg/modules/setup"
 	"gurusaranm0025/hyprone/pkg/modules/themer"
 	"log/slog"
 	"os"
@@ -16,8 +18,8 @@ import (
 
 var VERSION = "0.6.1-1 (alpha)"
 
-var brightness, sound, mute, hypridle, installTheme string
-var initialise, wallpaperGUI, sinks, themeInstall, ver bool
+var brightness, sound, mute, hypridle, initialSetup, installTheme string
+var initialise, wallpaperGUI, sinks, themeInstall, ver, force bool
 var logoutLayout int
 
 var rootCMD = &cobra.Command{
@@ -79,6 +81,28 @@ var rootCMD = &cobra.Command{
 			}
 		}
 
+		if len(initialSetup) > 0 {
+			if initialSetup == "directory" {
+				if err = setup.DirsCheck(); err != nil {
+					return err
+				}
+			}
+
+			if initialSetup == "dependency" {
+				if err = setup.InstallDependencies(); err != nil {
+					return err
+				}
+			}
+
+			if initialSetup == "full" {
+				if err = setup.DoInitialSetup(force); err != nil {
+					return err
+				}
+			}
+
+			return errors.New("provide a valid value from the options : full, dependency, directory")
+		}
+
 		if ver {
 			fmt.Println(VERSION)
 		}
@@ -106,7 +130,11 @@ func initializeFlags() {
 
 	rootCMD.Flags().StringVar(&installTheme, "install-theme", "", "Name of any themes available. Eg: default (For now only default is there...)")
 
+	rootCMD.Flags().StringVar(&initialSetup, "initial-setup", "", "A value must be provided by user from the possible values. Performs initial setup, can also perform stages of initial setup. Possible values : full, directory, dependency")
+
 	rootCMD.Flags().BoolVar(&ver, "version", false, "current version")
+
+	rootCMD.Flags().BoolVarP(&force, "force", "f", false, "force...")
 }
 
 func Execute() {

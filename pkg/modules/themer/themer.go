@@ -3,7 +3,7 @@ package themer
 import (
 	"fmt"
 	"gurusaranm0025/hyprone/pkg/common"
-	"gurusaranm0025/hyprone/pkg/modules/setup"
+	"gurusaranm0025/hyprone/pkg/config"
 	"gurusaranm0025/hyprone/pkg/utils"
 	"log/slog"
 	"os"
@@ -29,8 +29,13 @@ func (t *Themer) Install() error {
 	var err error
 
 	// CREATING DIRECTORIES
-	if !setup.CheckInitialSetupNE() {
-		if err = setup.DoInitialSetup(); err != nil {
+	if !config.CheckInitialSetupNE() {
+		command := "hyprone --initial-setup directory"
+		if _, err = utils.ExecCommand(command); err != nil {
+			return err
+		}
+		command = "hyprone --initial-setup dependency"
+		if _, err = utils.ExecCommand(command); err != nil {
 			return err
 		}
 	}

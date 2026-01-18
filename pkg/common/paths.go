@@ -1,15 +1,24 @@
 package common
 
 import (
-	"gurusaranm0025/hyprone/pkg/utils"
+	"log/slog"
+	"os"
 	"path/filepath"
 )
 
-var SCRIPTS_DIR_PATH = filepath.Join(utils.GetHomeDir(), ".local/share/bin")
-var CONFIG_DIR_PATH = filepath.Join(utils.GetHomeDir(), ".config/hyprone")
+func getHomeDir() string {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		slog.Error(err.Error())
+	}
+	return home
+}
+
+var SCRIPTS_DIR_PATH = filepath.Join(getHomeDir(), ".local/share/bin")
+var CONFIG_DIR_PATH = filepath.Join(getHomeDir(), ".config/hyprone")
 var ALL_WALLS_DIR_PATH = filepath.Join(CONFIG_DIR_PATH, "walls")
 var CURRENT_WALL_DIR_PATH = filepath.Join(CONFIG_DIR_PATH, "current_wall")
-var GIT_CLONE_DIR_PATH = filepath.Join(utils.GetHomeDir(), ".config/hyprone/.temp/git_clone")
+var GIT_CLONE_DIR_PATH = filepath.Join(getHomeDir(), ".config/hyprone/.temp/git_clone")
 
 var HYPR01_CONFIG_PATH = filepath.Join(CONFIG_DIR_PATH, "config.json")
 

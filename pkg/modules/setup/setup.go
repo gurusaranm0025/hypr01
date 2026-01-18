@@ -1,61 +1,68 @@
 package setup
 
 import (
-	"encoding/json"
-	"errors"
 	"gurusaranm0025/hyprone/pkg/common"
 	"gurusaranm0025/hyprone/pkg/config"
+	"gurusaranm0025/hyprone/pkg/modules/themer"
 	"gurusaranm0025/hyprone/pkg/utils"
-	"log/slog"
-	"os"
 )
 
-var IsADir = errors.New("provided is a directory")
-
-func CheckInitialSetup() (bool, error) {
-	info, err := os.Stat(common.HYPR01_CONFIG_PATH)
-	if err != nil {
-		if os.IsNotExist(err) {
-			return false, nil
-		}
-		return false, err
-	}
-
-	if info.IsDir() {
-		return false, IsADir
-	}
-
-	// Reading the config file
-	data, err := os.ReadFile(common.HYPR01_CONFIG_PATH)
-	if err != nil {
-		return false, err
-	}
-
-	var cfg config.Config
-	if err := json.Unmarshal(data, &cfg); err != nil {
-		return false, err
-	}
-
-	if cfg.InitialSetup {
-		return true, nil
-	}
-
-	return false, nil
+var Dependencies = []string{
+	"wireplumber",
+	"brightnessctl",
+	"swww",
+	"cliphist",
+	"wl-clipboard",
+	"hypridle",
+	"eza",
 }
 
-func CheckInitialSetupNE() bool {
-	isDone, err := CheckInitialSetup()
-	if err != nil {
-		slog.Error(err.Error())
-	}
-
-	return isDone
+func InstallDependencies() error {
+	return utils.InstallPackages(Dependencies...)
 }
 
-func DoInitialSetup() {
+func DoInitialSetup(force bool) error {
+	var err error
+	var conf config.Config
+
+	// Initial Setup Check
+	if config.CheckInitialSetupNE() && !force {
+		return nil
+	}
+
 	// CREATE DIRS
-	utils.CreateDir(common.CONFIG_DIR_PATH)
-	utils.CreateDir(common.ALL_WALLS_DIR_PATH)
-	utils.CreateDir(common.CURRENT_WALL_DIR_PATH)
+	if err = DirsCheck(); err != nil {
+		return err
+	}
 
+	// INSTALLING DEPENDENCIES
+	if err = InstallDependencies(); err != nil {
+		return err
+	}
+
+	// INSTALL DEFAULT THEME
+	theme := themer.NewThemer("default")
+	if err = theme.Install(); err != nil {
+		return err
+	}
+
+	// SAVING CONFIG
+	if conf, err = config.LoadConfig(); err != nil {
+		return err
+	}
+	conf.InitialSetup = true
+	config.SaveConfig(conf)
+
+	return nil
+}
+
+func DirsCheck() error {
+	var err error
+
+	for _, path := range common.PlaceholderValues {
+		if err = utils.CreateDir(path); err != nil {
+			return err
+		}
+	}
+	return nil
 }
