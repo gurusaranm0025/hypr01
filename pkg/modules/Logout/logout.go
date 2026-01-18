@@ -60,6 +60,11 @@ func Logout(layout int) error {
 	var cols int
 	var err error
 
+	// this command is little different from other error checks
+	if _, err = utils.ExecCommand("pkill wlogout"); err == nil {
+		return nil
+	}
+
 	home := utils.GetHomeDir()
 	layoutPath := fmt.Sprintf("%s/.config/wlogout/layout_%d", home, layout)
 	stylesPath := fmt.Sprintf("%s/.config/wlogout/style_%d.css", home, layout)
