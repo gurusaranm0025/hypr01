@@ -18,9 +18,6 @@ FEATURES :
         1. monitor.conf in hyprland conf needs the monitor value of that particular monitor.
         2. Need to remove junks from logout function. (because of the moved file generating)
 2. Fix: Floating window size (resize)
-3. Bug: Logout menu appearing more than once.
-4. CopyFile func to replace cp --> ExecCommand("cp")
 
 +++ NOTES +++
 1. still some paths are left as it is, in the hyprland configs (default theme)
-2. when scripts are pushed into repo and installed elsewhere, their file permissions are persistent.
