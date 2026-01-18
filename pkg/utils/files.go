@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"io"
 	"os"
 	"path/filepath"
 )
@@ -20,9 +21,31 @@ func WriteFile(content, path string) error {
 		return err
 	}
 
-	if err = os.WriteFile(path, []byte(content), os.ModePerm); err != nil {
+	return os.WriteFile(path, []byte(content), os.ModePerm)
+}
+
+func CopyFile(sourcePath, destPath string) error {
+	var info os.FileInfo
+	var source, dest *os.File
+	var err error
+
+	if info, err = os.Stat(sourcePath); err != nil {
 		return err
 	}
 
-	return nil
+	if source, err = os.Open(sourcePath); err != nil {
+		return err
+	}
+	defer source.Close()
+
+	if dest, err = os.OpenFile(destPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, info.Mode()); err != nil {
+		return err
+	}
+	defer dest.Close()
+
+	if _, err = io.Copy(dest, source); err != nil {
+		return err
+	}
+
+	return os.Chmod(destPath, info.Mode())
 }

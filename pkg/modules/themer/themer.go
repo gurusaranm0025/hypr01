@@ -12,6 +12,10 @@ import (
 )
 
 func NewThemer(themeName string) *Themer {
+	if themeName == "default" {
+		themeName = common.DEFAULT_THEME
+	}
+
 	return &Themer{
 		ThemeName: themeName,
 	}
@@ -26,7 +30,9 @@ func (t *Themer) Install() error {
 
 	// CREATING DIRECTORIES
 	if !setup.CheckInitialSetupNE() {
-		setup.DoInitialSetup()
+		if err = setup.DoInitialSetup(); err != nil {
+			return err
+		}
 	}
 
 	utils.CreateDir(common.GIT_CLONE_DIR_PATH)
@@ -78,16 +84,10 @@ func (t *Themer) filesCopier(fileFolderLocation, targetLocation string) error {
 
 			if strings.HasPrefix(entry.Info.Name(), "$") {
 				copy_location = filepath.Join(targetLocation, strings.TrimPrefix(entry.Info.Name(), "$"))
-				if err = t.filler(current_location, copy_location); err != nil {
-					return err
-				}
+				return t.filler(current_location, copy_location)
 			} else {
 				// fmt.Printf("filesCopier ===> %s --> %s\n", current_location, copy_location)
-				command := fmt.Sprintf("cp %s %s", current_location, copy_location)
-				if _, err = utils.ExecCommand(command); err != nil {
-					// fmt.Printf("ERROR ===> %s\n", out)
-					return err
-				}
+				return utils.CopyFile(current_location, copy_location)
 			}
 		}
 	}
@@ -106,11 +106,6 @@ func (t *Themer) filler(path, savePath string) error {
 		file = strings.ReplaceAll(file, old, new)
 	}
 
-	if err = utils.WriteFile(file, savePath); err != nil {
-		return err
-	}
-
 	// fmt.Printf("filler ==> %s --> %s\n", path, savePath)
-
-	return nil
+	return utils.WriteFile(file, savePath)
 }
