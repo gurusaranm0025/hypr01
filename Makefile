@@ -20,7 +20,7 @@ install: build
 	sudo cp ./build/$(BINARY_NAME) $(INSTALL_DIR)
 	sudo install -Dm755 ./build/$(BINARY_NAME) $(INSTALL_DIR)/$(BINARY_NAME)
 
-	@echo "IF ITS THE 1st TIME, PERFORMING INITIAL SETUP AND DEFAULT THEME = (TOKYO NIGHT)..."
+	@echo "PERFORMING INITIAL SETUP..."
 	hyprone --initial-setup full
 
 	@echo "STARTING hyprone..."
