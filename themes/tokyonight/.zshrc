@@ -57,9 +57,6 @@ alias ls='eza -a --git --icons=automatic --group-directories-first'
 alias ll='eza -al'
 alias lt='eza -a --tree --level=2 --group-directories-first --icons=automatic'
 
-alias cat="bat"
-alias ccat="/bin/cat"
-
 alias vim-zshrc="vim ~/.zshrc"
 alias vimzshrc="vim $XDG_CONFIG_HOME/zsh/.zshrc"
 alias vimsudo='sudo -E nvim /etc/sudoers'
