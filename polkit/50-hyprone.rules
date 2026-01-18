@@ -1,0 +1,7 @@
+// /usr/share/polkit-1/rules.d/50-myapp.rules
+polkit.addRule(function(action, subject) {
+    if (action.id == "com.hyprone" &&
+        subject.isInGroup("wheel")) {
+        return polkit.Result.AUTH_ADMIN;
+    }
+});

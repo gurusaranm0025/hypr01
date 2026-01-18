@@ -19,6 +19,8 @@ install: build
 	@echo "INSTALLING..."
 	sudo cp ./build/$(BINARY_NAME) $(INSTALL_DIR)
 	sudo chmod +x $(INSTALL_DIR)/$(BINARY_NAME)
+	sudo cp ./polkit/com.hyprone.policy /usr/share/polit-1/actions/com.hyprone.policy
+	sudo cp ./polkit/50-hyprone.rules /usr/share/polit-1/rules.d/50-hyprone.rules
 		
 	@echo "STARTING hyprone..."
 	hyprone -i & disown
