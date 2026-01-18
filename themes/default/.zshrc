@@ -65,8 +65,10 @@ alias vimzshrc="vim $XDG_CONFIG_HOME/zsh/.zshrc"
 alias vimsudo='sudo -E nvim /etc/sudoers'
 
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
-alias g='grep'
+alias grep='grep -i'
 alias man="COLUMNS=100 man"
+
+alias git-staging-clear='git restore --staged'
 
 alias mkdir="mkdir -p"
 alias mv='mv -v'
