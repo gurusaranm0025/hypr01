@@ -14,13 +14,13 @@ build:
 
 install: build
 	@echo "KILLING hyprone PROCESS..."
-	killall -9 hyprone
+	-killall -9 hyprone
 
 	@echo "INSTALLING..."
 	sudo cp ./build/$(BINARY_NAME) $(INSTALL_DIR)
-	sudo chmod 755 $(INSTALL_DIR)/$(BINARY_NAME)
+	sudo install -Dm755 ./build/$(BINARY_NAME) $(INSTALL_DIR)/$(BINARY_NAME)
 
-	@IF ITS THE 1st TIME ==> PERFORMING INITIAL SETUP AND DEFAULT THEME (TOKYO NIGHT)...
+	@echo "IF ITS THE 1st TIME, PERFORMING INITIAL SETUP AND DEFAULT THEME = (TOKYO NIGHT)..."
 	hyprone --initial-setup full
 
 	@echo "STARTING hyprone..."

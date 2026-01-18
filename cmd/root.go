@@ -16,7 +16,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var VERSION = "0.6.1-1 (alpha)"
+var VERSION = "0.6.2-1 (alpha)"
 
 var brightness, sound, mute, hypridle, initialSetup, installTheme string
 var initialise, wallpaperGUI, sinks, themeInstall, ver, force bool
@@ -82,25 +82,22 @@ var rootCMD = &cobra.Command{
 		}
 
 		if len(initialSetup) > 0 {
-			if initialSetup == "directory" {
+			switch initialSetup {
+			case "directory":
 				if err = setup.DirsCheck(); err != nil {
 					return err
 				}
-			}
-
-			if initialSetup == "dependency" {
+			case "dependency":
 				if err = setup.InstallDependencies(); err != nil {
 					return err
 				}
-			}
-
-			if initialSetup == "full" {
+			case "full":
 				if err = setup.DoInitialSetup(force); err != nil {
 					return err
 				}
+			default:
+				return errors.New("provide a valid value from the options : full, dependency, directory")
 			}
-
-			return errors.New("provide a valid value from the options : full, dependency, directory")
 		}
 
 		if ver {

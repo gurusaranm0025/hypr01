@@ -5,6 +5,7 @@ import (
 	"gurusaranm0025/hyprone/pkg/config"
 	"gurusaranm0025/hyprone/pkg/modules/themer"
 	"gurusaranm0025/hyprone/pkg/utils"
+	"log/slog"
 )
 
 var Dependencies = []string{
@@ -18,7 +19,10 @@ var Dependencies = []string{
 }
 
 func InstallDependencies() error {
-	return utils.InstallPackages(Dependencies...)
+	if err := utils.InstallPackages(Dependencies...); err != nil {
+		return err
+	}
+	return nil
 }
 
 func DoInitialSetup(force bool) error {
@@ -27,6 +31,7 @@ func DoInitialSetup(force bool) error {
 
 	// Initial Setup Check
 	if config.CheckInitialSetupNE() && !force {
+		slog.Info("Initial Setup is already done. Moving on...")
 		return nil
 	}
 
@@ -51,7 +56,9 @@ func DoInitialSetup(force bool) error {
 		return err
 	}
 	conf.InitialSetup = true
-	config.SaveConfig(conf)
+	if err = config.SaveConfig(conf); err != nil {
+		return err
+	}
 
 	return nil
 }

@@ -19,6 +19,11 @@ func LoadConfig() (Config, error) {
 
 	data, err := os.ReadFile(common.HYPR01_CONFIG_PATH)
 	if err != nil {
+		if os.IsNotExist(err) {
+			return Config{
+				InitialSetup: false,
+			}, nil
+		}
 		return config, err
 	}
 
